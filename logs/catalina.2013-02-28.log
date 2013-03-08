@@ -1,0 +1,30 @@
+Feb 28, 2013 2:31:41 PM org.apache.catalina.core.AprLifecycleListener init
+INFO: The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: /usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64/server:/usr/lib/jvm/java-6-openjdk-amd64/jre/lib/amd64:/usr/lib/jvm/java-6-openjdk-amd64/jre/../lib/amd64:/oracle/lib:/usr/java/packages/lib/amd64:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+Feb 28, 2013 2:31:41 PM org.apache.coyote.http11.Http11Protocol init
+INFO: Initializing Coyote HTTP/1.1 on http-16320
+Feb 28, 2013 2:31:41 PM org.apache.catalina.startup.Catalina load
+INFO: Initialization processed in 582 ms
+Feb 28, 2013 2:31:41 PM org.apache.catalina.core.StandardService start
+INFO: Starting service Catalina
+Feb 28, 2013 2:31:41 PM org.apache.catalina.core.StandardEngine start
+INFO: Starting Servlet Engine: Apache Tomcat/6.0.35
+Feb 28, 2013 2:31:41 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory ROOT
+Feb 28, 2013 2:31:42 PM org.apache.catalina.startup.HostConfig deployDirectory
+INFO: Deploying web application directory proj1
+Feb 28, 2013 2:31:42 PM org.apache.coyote.http11.Http11Protocol start
+INFO: Starting Coyote HTTP/1.1 on http-16320
+Feb 28, 2013 2:31:42 PM org.apache.jk.common.ChannelSocket init
+INFO: JK: ajp13 listening on /0.0.0.0:8009
+Feb 28, 2013 2:31:42 PM org.apache.jk.server.JkMain start
+INFO: Jk running ID=0 time=0/16  config=null
+Feb 28, 2013 2:31:42 PM org.apache.catalina.startup.Catalina start
+INFO: Server startup in 691 ms
+Feb 28, 2013 2:45:32 PM org.apache.catalina.startup.HostConfig checkResources
+INFO: Reloading context [/proj1]
+Feb 28, 2013 2:53:57 PM org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausing Coyote HTTP/1.1 on http-16320
+Feb 28, 2013 2:53:58 PM org.apache.catalina.core.StandardService stop
+INFO: Stopping service Catalina
+Feb 28, 2013 2:53:58 PM org.apache.coyote.http11.Http11Protocol destroy
+INFO: Stopping Coyote HTTP/1.1 on http-16320
