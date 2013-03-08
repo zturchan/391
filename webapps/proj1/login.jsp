@@ -22,7 +22,8 @@
         	out.println("<p>Your input User Name is "+userName+"</p>");
         	out.println("<p>Your input password is "+passwd+"</p>");
 
-
+			out.println("<p><a href = \"userinfo.html\">Manage User Info</a></p>");
+			
 	        //establish the connection to the underlying database
         	Connection conn = null;
 	
@@ -91,6 +92,7 @@
                 out.println("</form>");
         }      
 %>
+
 
 
 

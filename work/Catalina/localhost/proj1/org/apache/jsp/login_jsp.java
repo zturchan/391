@@ -75,7 +75,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         	out.println("<p>Your input User Name is "+userName+"</p>");
         	out.println("<p>Your input password is "+passwd+"</p>");
 
-
+			out.println("<p><a href = \"userinfo.html\">Manage User Info</a></p>");
+			
 	        //establish the connection to the underlying database
         	Connection conn = null;
 	
@@ -144,6 +145,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
                 out.println("</form>");
         }      
 
+      out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");

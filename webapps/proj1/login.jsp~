@@ -22,7 +22,8 @@
         	out.println("<p>Your input User Name is "+userName+"</p>");
         	out.println("<p>Your input password is "+passwd+"</p>");
 
-
+			out.println("<p><a href = "userinfo.html">Manage User Info</a></p>");
+			
 	        //establish the connection to the underlying database
         	Connection conn = null;
 	
@@ -53,7 +54,7 @@
 	        //select the user table from the underlying db and validate the user name and password
         	Statement stmt = null;
 	        ResultSet rset = null;
-        	String sql = "select PASSWORD from users where id = '"+userName+"'";
+        	String sql = "select PASSWORD from users where USER_NAME = '"+userName+"'";
 	        out.println(sql);
         	try{
 	        	stmt = conn.createStatement();
@@ -91,6 +92,7 @@
                 out.println("</form>");
         }      
 %>
+
 
 
 
