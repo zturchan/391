@@ -53,7 +53,7 @@
 	        //select the user table from the underlying db and validate the user name and password
         	Statement stmt = null;
 	        ResultSet rset = null;
-        	String sql = "select PWD from login where id = '"+userName+"'";
+        	String sql = "select PASSWORD from users where USER_NAME = '"+userName+"'";
 	        out.println(sql);
         	try{
 	        	stmt = conn.createStatement();

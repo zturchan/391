@@ -41,7 +41,7 @@
 	
         	try{
 	        	//establish the connection 
-		        conn = DriverManager.getConnection(dbstring,"your_user_id","your_pass_word");
+		        conn = DriverManager.getConnection(dbstring,"zturchan","Pikachu1");
         		conn.setAutoCommit(false);
 	        }
         	catch(Exception ex){
@@ -53,7 +53,7 @@
 	        //select the user table from the underlying db and validate the user name and password
         	Statement stmt = null;
 	        ResultSet rset = null;
-        	String sql = "select PWD from login where id = '"+userName+"'";
+        	String sql = "select PASSWORD from users where id = '"+userName+"'";
 	        out.println(sql);
         	try{
 	        	stmt = conn.createStatement();
