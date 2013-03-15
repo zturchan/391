@@ -55,7 +55,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<HEAD>\r\n");
       out.write("\r\n");
       out.write("\r\n");
-      out.write("<TITLE>Your Login Result</TITLE>\r\n");
+      out.write("<TITLE>RIS</TITLE>\r\n");
       out.write("</HEAD>\r\n");
       out.write("\r\n");
       out.write("<BODY>\r\n");
@@ -72,10 +72,10 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 	        //get the user input from the login page
         	String userName = (request.getParameter("USERID")).trim();
 	        String passwd = (request.getParameter("PASSWD")).trim();
-        	out.println("<p>Your input User Name is "+userName+"</p>");
-        	out.println("<p>Your input password is "+passwd+"</p>");
+        	//out.println("<p>Your input User Name is "+userName+"</p>");
+        	//out.println("<p>Your input password is "+passwd+"</p>");
 
-			out.println("<p><a href = \"userinfo.html\">Manage User Info</a></p>");
+
 			
 	        //establish the connection to the underlying database
         	Connection conn = null;
@@ -108,7 +108,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
         	Statement stmt = null;
 	        ResultSet rset = null;
         	String sql = "select PASSWORD from users where USER_NAME = '"+userName+"'";
-	        out.println(sql);
+	        //out.println(sql);
         	try{
 	        	stmt = conn.createStatement();
 		        rset = stmt.executeQuery(sql);
@@ -125,16 +125,22 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 	
         	//display the result
 	        if(passwd.equals(truepwd))
-		        out.println("<p><b>Your Login is Successful!</b></p>");
+		        out.println("<p><b>Welcome to RIS!</b></p>");
         	else
-	        	out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
+	        	//out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
 
                 try{
                         conn.close();
+                        //Almost certain this is not how we're supposed to do it & it's slow, but no idea how to do it right.
+                        javax.swing.JOptionPane.showMessageDialog(null, "Invalid login credentials");
+                        
+                        //Redirect code from http://stackoverflow.com/questions/2443247/redirecting-users-in-jsp-from-within-a-includes-java-syntax-error
+                        response.sendRedirect("../proj1/login.html");
                 }
                 catch(Exception ex){
                         out.println("<hr>" + ex.getMessage() + "<hr>");
                 }
+            out.println("<p><a href = \"userinfo.html\">Manage User Info</a></p>");
         }
         else
         {
@@ -147,7 +153,7 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\r\n");
       out.write("\r\n");
-      out.write("\r\n");
+      out.write("You logged in \r\n");
       out.write("\r\n");
       out.write("\r\n");
       out.write("</BODY>\r\n");
