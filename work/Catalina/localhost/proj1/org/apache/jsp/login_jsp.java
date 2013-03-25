@@ -104,6 +104,7 @@ if(passwd.equals(truepwd)){
 else {
 	//out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
     try{
+    	stmt.close();
 		conn.close();
         //Almost certain this is not how we're supposed to do it & it's slow, but no idea how to do it right.
         javax.swing.JOptionPane.showMessageDialog(null, "Invalid login credentials");                     

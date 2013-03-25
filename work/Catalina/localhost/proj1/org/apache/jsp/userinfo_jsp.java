@@ -51,15 +51,19 @@ public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write("<HTML>\r\n");
-      out.write("<HEAD>\r\n");
-      out.write("<TITLE>RIS</TITLE>\r\n");
-      out.write("</HEAD>\r\n");
-      out.write("\r\n");
-      out.write("<BODY>\r\n");
-      out.write("\r\n");
+      out.write("<HTML>\n");
+      out.write("<HEAD>\n");
+      out.write("<TITLE>RIS</TITLE>\n");
+      out.write("</HEAD>\n");
+      out.write("\n");
+      out.write("<BODY>\n");
+      out.write("\n");
 
-String newPass = (request.getParameter("NEWPASSWD")).trim();
+String newFirst = (request.getParameter("FIRST")).trim();
+String newLast = (request.getParameter("LAST")).trim();
+String newAdd = (request.getParameter("ADDRESS")).trim();
+String newEmail = (request.getParameter("EMAIL")).trim();
+String newPhone = (request.getParameter("PHONE")).trim();
 
 //establish the connection to the underlying database
 Connection conn = null;
@@ -103,19 +107,21 @@ if(!rset.next()){
 //out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
-	sql = "select PASSWORD from users where USER_NAME = '"+sessionUserName+"'";
+	sql = "select FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE from persons where USER_NAME = '"+sessionUserName+"'";
+	//out.println(sql);
 	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 	rset = stmt.executeQuery(sql);
 	rset.absolute(1);
-	rset.updateString(1,newPass);
+	rset.updateString(1,newFirst);
+	rset.updateString(2,newLast);
+	rset.updateString(3,newAdd);	
+	rset.updateString(4,newEmail);
+	rset.updateString(5,newPhone);		 
 	rset.updateRow();
 	ResultSet newRset = stmt.executeQuery(sql);
-	while(newRset.next()){
-		javax.swing.JOptionPane.showMessageDialog(null, "Password Successfully Changed.");
-		//out.println("New pass is: " + newRset.getString(1));
-	}
 	stmt.close();
     conn.close();
+    javax.swing.JOptionPane.showMessageDialog(null, "Personal Information Changed:\n"+newFirst+ " " + newLast +"\n"+newAdd+"\n" + newPhone +"\n"+newEmail);
     response.sendRedirect("../proj1/home.html");
 }
 catch(SQLException ex) {
@@ -123,12 +129,12 @@ catch(SQLException ex) {
 	ex.getMessage());
 }
 
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("\r\n");
-      out.write("</BODY>\r\n");
-      out.write("</HTML>\r\n");
-      out.write("\r\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("</BODY>\n");
+      out.write("</HTML>\n");
+      out.write("\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
         out = _jspx_out;
