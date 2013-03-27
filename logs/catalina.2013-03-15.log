@@ -52,3 +52,9 @@ Mar 15, 2013 12:20:18 PM org.apache.jk.server.JkMain start
 INFO: Jk running ID=0 time=0/9  config=null
 Mar 15, 2013 12:20:18 PM org.apache.catalina.startup.Catalina start
 INFO: Server startup in 181 ms
+Mar 15, 2013 12:24:04 PM org.apache.coyote.http11.Http11Protocol pause
+INFO: Pausing Coyote HTTP/1.1 on http-16320
+Mar 15, 2013 12:24:05 PM org.apache.catalina.core.StandardService stop
+INFO: Stopping service Catalina
+Mar 15, 2013 12:24:05 PM org.apache.coyote.http11.Http11Protocol destroy
+INFO: Stopping Coyote HTTP/1.1 on http-16320
