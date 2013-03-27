@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.*;
 
-public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class changepw_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -51,14 +51,16 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write('\r');
-      out.write('\n');
+      out.write("<HTML>\r\n");
+      out.write("<HEAD>\r\n");
+      out.write("<TITLE>RIS</TITLE>\r\n");
+      out.write("</HEAD>\r\n");
+      out.write("\r\n");
+      out.write("<BODY>\r\n");
+      out.write("\r\n");
 
-//get the user input from the login page
-String userName = (request.getParameter("USERID")).trim();
-String passwd = (request.getParameter("PASSWD")).trim();
-//out.println("<p>Your input User Name is "+userName+"</p>");
-//out.println("<p>Your input password is "+passwd+"</p>");
+String newPass = (request.getParameter("NEWPASSWD")).trim();
+
 //establish the connection to the underlying database
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -71,21 +73,19 @@ try{
 catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
-
 try{
 	//establish the connection
 	conn = DriverManager.getConnection(dbstring,"zturchan","Pikachu1");
-	conn.setAutoCommit(false);
+    conn.setAutoCommit(false);
 }
 catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
-
+String sessionUserName = (String) session.getAttribute("userName");
 //select the user table from the underlying db and validate the user name and password
 Statement stmt = null;
 ResultSet rset = null;
-String sql = "select PASSWORD from users where USER_NAME = '"+userName+"'";
-//out.println(sql);
+String sql = "select USER_NAME from users where USER_NAME = '"+sessionUserName+"'";
 try{
 	stmt = conn.createStatement();
 	rset = stmt.executeQuery(sql);
@@ -93,32 +93,41 @@ try{
 catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
-String truepwd = "";
-while(rset != null && rset.next())
-	truepwd = (rset.getString(1)).trim();
-//display the result
-if(passwd.equals(truepwd)){
-	session.setAttribute("userName", userName);
-	response.sendRedirect("../proj1/home.html");    
+if(!rset.next()){
+	//If we're not a curently authenticated user, redirect to login
+	//This should also implement timeout functionality as added bonus
+	javax.swing.JOptionPane.showMessageDialog(null, "You cannot perform that action.  Please authenticate first.");
+	response.sendRedirect("../proj1/login.html");
 }
-else {
-	//out.println("<p><b>Either your userName or Your password is inValid!</b></p>");
-    try{
-    	stmt.close();
-		conn.close();
-        //Almost certain this is not how we're supposed to do it & it's slow, but no idea how to do it right.
-        javax.swing.JOptionPane.showMessageDialog(null, "Invalid login credentials");                     
-		//Redirect code from http://stackoverflow.com/questions/2443247/redirecting-users-in-jsp-from-within-a-includes-java-syntax-error
-		response.sendRedirect("../proj1/login.html");
+
+//out.println("Should be a real session user");
+//So if we get here, we're authenticated.
+try {
+	sql = "select PASSWORD from users where USER_NAME = '"+sessionUserName+"'";
+	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+	rset = stmt.executeQuery(sql);
+	rset.absolute(1);
+	rset.updateString(1,newPass);
+	rset.updateRow();
+	ResultSet newRset = stmt.executeQuery(sql);
+	while(newRset.next()){
+		javax.swing.JOptionPane.showMessageDialog(null, "Password Successfully Changed.");
+		//out.println("New pass is: " + newRset.getString(1));
 	}
-    catch(Exception ex){
-		out.println("<hr>" + ex.getMessage() + "<hr>");
-	}
+	stmt.close();
+    conn.close();
+    response.sendRedirect("../proj1/home.html");
+}
+catch(SQLException ex) {
+	System.err.println("SQLException: " +
+	ex.getMessage());
 }
 
       out.write("\r\n");
       out.write("\r\n");
       out.write("\r\n");
+      out.write("</BODY>\r\n");
+      out.write("</HTML>\r\n");
       out.write("\r\n");
     } catch (Throwable t) {
       if (!(t instanceof SkipPageException)){
