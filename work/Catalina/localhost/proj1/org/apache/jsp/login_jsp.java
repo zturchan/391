@@ -51,8 +51,8 @@ public final class login_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write('\r');
-      out.write('\n');
+      out.write("\r\n");
+      out.write("\r\n");
 
 //get the user input from the login page
 String userName = (request.getParameter("USERID")).trim();
