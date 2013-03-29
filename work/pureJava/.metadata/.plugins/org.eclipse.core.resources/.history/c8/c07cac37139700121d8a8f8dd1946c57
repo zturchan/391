@@ -1,0 +1,19 @@
+package testing;
+
+import java.sql.*;
+
+
+public class QueryTest {
+
+	public static String driverName = "oracle.jdbc.driver.OracleDriver";
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		Class drvClass = Class.forName(driverName);
+		Connection con = DriverManager.getConnection(url, username, password);
+	}
+
+}

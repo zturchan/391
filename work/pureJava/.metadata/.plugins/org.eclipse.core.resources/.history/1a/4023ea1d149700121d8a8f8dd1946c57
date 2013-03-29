@@ -1,0 +1,26 @@
+package testing;
+
+import java.sql.*;
+
+
+public class QueryTest {
+
+	public static String driverName = "oracle.jdbc.driver.OracleDriver";
+	public static String url	=	"jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+	
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		try {
+			Class drvClass = Class.forName(driverName);
+		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			
+		}
+	}
+
+}
