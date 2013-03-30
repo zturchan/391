@@ -1,0 +1,16 @@
+package testing;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class TestUtils {
+
+	public static void printRSet(ResultSet rset, int colnum) throws SQLException {		
+		while (rset.next()) {
+			for (int i = 1; i < colnum, i++){
+				System.out.println("\t" + rset.getString(i));
+			}
+			
+		}
+	}
+}

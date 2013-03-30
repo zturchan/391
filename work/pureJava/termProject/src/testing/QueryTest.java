@@ -1,8 +1,10 @@
 package testing;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 import search.DBAccess;
+import search.Record;
 
 
 public class QueryTest {
@@ -16,8 +18,10 @@ public class QueryTest {
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
 		
-		ResultSet rset = DBAccess.getRecords("cat");
-		TestUtils.printRSet(rset);
+		ArrayList<Record> records = DBAccess.getRecords("keyword", true);
+		for(Record r : records){
+			System.out.println(r.getTest_date().toString() + "  " + r.getRank());
+		}
 
 	}
 

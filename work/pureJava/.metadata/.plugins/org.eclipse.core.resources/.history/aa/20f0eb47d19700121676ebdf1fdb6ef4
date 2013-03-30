@@ -1,0 +1,28 @@
+package testing;
+
+import java.sql.*;
+
+import search.DBAccess;
+import search.Record;
+
+
+public class QueryTest {
+
+
+	/**
+	 * @param args
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+		ResultSet rset = DBAccess.getRecords("b");
+		rset.next();
+		//TestUtils.printRSet(rset, 11);
+		Record r = new Record(rset);
+		System.out.println(r.getDescription() + r.getRank());
+
+	}
+
+}

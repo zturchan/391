@@ -1,0 +1,29 @@
+package search;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class DBAccess {
+
+	public static String driverName = "oracle.jdbc.driver.OracleDriver";
+	public static String url = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+
+	public static ResultSet getRecords(String searchTerm) throws SQLException,
+			ClassNotFoundException {
+
+		// connect to our db
+		Class drvClass = Class.forName(driverName);
+		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+		Statement stmt = con.createStatement();
+		ResultSet rset = stmt.executeQuery("select * from radiolog_record");
+				//.executeQuery("SELECT score(1), score(2), score(3), record_id, patient_name, " +
+					//	"doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description FROM radiology_record WHERE contains(patient_name, '"+searchTerm+"', 1) > 0 or contains(diagnosis, '"+searchTerm+"', 2) > 0 or contains(description, '"+searchTerm+"', 3) > 0 order by score(1) desc;");
+
+		return rset;
+
+	}
+
+}
