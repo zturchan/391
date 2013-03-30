@@ -1,12 +1,14 @@
 package testing;
 
 import java.sql.*;
+import java.util.ArrayList;
+
+import search.DBAccess;
+import search.Record;
 
 
 public class QueryTest {
 
-	public static String driverName = "oracle.jdbc.driver.OracleDriver";
-	public static String url	=	"jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
 
 	/**
 	 * @param args
@@ -15,11 +17,16 @@ public class QueryTest {
 	 */
 	public static void main(String[] args) throws SQLException, ClassNotFoundException {
 		// TODO Auto-generated method stub
-		Class drvClass = Class.forName(driverName);
-		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
-		Statement stmt = con.createStatement();
-		stmt.executeUpdate("insert into toffees values ('joe', 101)");
-
+		
+		//default dates
+		String defaultStart = "9888-01-01";
+		String defaultEnd = "0001-01-01";
+		
+		ArrayList<Record> records = DBAccess.getRecords("keyword", true, "to_date('"+defaultStart+"', 'yyyy-mm-dd')", "to_date('"+defaultEnd+"', 'yyyy-mm-dd')");
+		records = DBAccess.filterRecords(records);
+		for(Record r : records){
+			System.out.println(r.getTest_date().toString() + "  " + r.getRank());
+		}
 
 	}
 

@@ -1,0 +1,38 @@
+package search;
+
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class Record {
+	
+	private int record_id;
+	private String patient_name;
+	private String doctor_name;
+	private String radiologist_name;
+	private String test_type;
+	private Date prescribing_date;
+	private Date test_date;
+	private String diagnosis;
+	private String description;
+	private int name_score; //added when we retrieve query
+	private int diagnosis_score;
+	private int description_score;
+	
+	
+	//assumes result set is pointing to desired row
+	public Record (ResultSet rset) throws SQLException{
+		setRecord_id(rset.getInt("record_id"));
+		setPatient_name(rset.getString("patient_name"));
+		setDoctor_name(rset.getString("doctor_name"));
+		setRadiologist_name(rset.getString("radiologist_name"));
+		setTest_type(rset.getString("test_type"));
+		setPrescribing_date(rset.getDate("test_date"));
+		setTest_date(rset.getDate("test_date"));
+		setDiagnosis(rset.getString("diagnosis"));
+		setDescription(rset.getString("description"));
+		setRank(rset.getInt("score(1)"));
+	}
+
+	
+}

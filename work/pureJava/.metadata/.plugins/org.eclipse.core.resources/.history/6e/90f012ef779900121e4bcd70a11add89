@@ -1,0 +1,29 @@
+package testing;
+
+import java.sql.*;
+import java.util.ArrayList;
+
+import search.DBAccess;
+import search.Record;
+
+
+public class QueryTest {
+
+
+	/**
+	 * @param args
+	 * @throws SQLException 
+	 * @throws ClassNotFoundException 
+	 */
+	public static void main(String[] args) throws SQLException, ClassNotFoundException {
+		// TODO Auto-generated method stub
+		
+		ArrayList<Record> records = DBAccess.getRecords(" ", true);
+		records = DBAccess.filterRecords(records);
+		for(Record r : records){
+			System.out.println(r.getTest_date().toString() + "  " + r.getRank());
+		}
+
+	}
+
+}
