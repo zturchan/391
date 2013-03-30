@@ -1,0 +1,52 @@
+<HTML>
+<HEAD>
+<TITLE>RIS - Modify user Info</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1><CENTER>Modify An Existing User's Information</CENTER></H1>
+
+<FORM NAME="ModForm" ACTION="modify.jsp" METHOD="post" >
+
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<!-- Things the admin cannot change: username, password, class -->
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Username (This person's values will be changed):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="USERNAME" VALUE=""><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>First Name:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="FIRST" VALUE=""><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Last Name:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="LAST" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Address:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="ADDRESS" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Phone Number  (up to 10 characters):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="PHONE" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Email:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="EMAIL" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD ID="DOCLABEL"><B><I>Family Doctor (Separate multiples by commas, old ones will be deleted):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="DOCTORNAME" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" VALUE="Update Info">
+</FORM>
+
+</BODY>
+</HTML>

@@ -1,0 +1,93 @@
+<HTML>
+<HEAD>
+<TITLE>RIS - Add New Person</TITLE>
+</HEAD>
+
+<BODY>
+
+<H1><CENTER>Add New Person</CENTER></H1>
+
+<FORM NAME="NewForm" ACTION="addnew.jsp" METHOD="post" >
+
+<TABLE>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Class:</I></B></TD>
+<TD>
+<!-- issue, if you check a nn-patient radiobutton and then refresh the page, the hidden fields will be displayed
+and h previous radiobutton will remain checked.  Most likely need some sort of javascript fix for this-->
+<!-- Show hide form fields from http://www.webdeveloper.com/forum/showthread.php?67756-show-and-hide-form-fields -->
+<!-- note that if the user goes from a patient to a nonpatient class the doctor field will be cleared, so we don' send that info to server-->
+<input type="radio" name="CLASS" value="doctor"  onclick="
+ if (this.checked) {
+ 	this.form.DICTORNAME.value='';
+  	this.form.DOCTORNAME.style.visibility='hidden';
+	document.getElementById('DOCLABEL').style.visibility='hidden';
+ } 
+ return true;">Doctor
+<input type="radio" name="CLASS" value="admin"  onclick="
+ if (this.checked) {
+  	this.form.DOCTORNAME.value='';
+   this.form.DOCTORNAME.style.visibility='hidden';
+   this.form.DOCLABEL.style.visibility='hidden';
+ } 
+ return true;">Admin
+<input type="radio" name="CLASS" value="radiologist"  onclick="
+ if (this.checked) {
+  	this.form.DOCTORNAME.value='';
+   this.form.DOCTORNAME.style.visibility='hidden';
+   document.getElementById('DOCLABEL').style.visibility='hidden';
+ } 
+ return true;">Radiologist
+<input type="radio" name="CLASS" value="patient" onclick="
+ if (this.checked) {
+   this.form.DOCTORNAME.style.visibility='visible';
+   document.getElementById('DOCLABEL').style.visibility='visible';
+ } else {
+  	this.form.DOCTORNAME.value='';
+   this.form.DOCTORNAME.style.visibility='hidden';
+   document.getElementById('DOCLABEL').style.visibility='hidden';
+ }
+ return true;" checked>Patient
+</TD></TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Username:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="USERNAME" VALUE=""><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Password:</I></B></TD>
+<TD><INPUT TYPE="password" NAME="PASSWORD" VALUE=""><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>First Name:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="FIRST" VALUE=""><BR></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Last Name:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="LAST" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Address:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="ADDRESS" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Phone Number  (up to 10 characters):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="PHONE" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>Email:</I></B></TD>
+<TD><INPUT TYPE="text" NAME="EMAIL" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD ID="DOCLABEL"><B><I>Family Doctor (Separate multiples by commas):</I></B></TD>
+<TD><INPUT TYPE="text" NAME="DOCTORNAME" VALUE=""></TD>
+</TR>
+<TR VALIGN=TOP ALIGN=LEFT>
+
+</TR>
+</TABLE>
+
+<INPUT TYPE="submit" VALUE="Add Person">
+</FORM>
+
+</BODY>
+</HTML>
