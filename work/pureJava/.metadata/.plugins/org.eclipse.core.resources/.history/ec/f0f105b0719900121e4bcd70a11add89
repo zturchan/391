@@ -51,13 +51,6 @@ public class DBAccess {
 	}
 	
 	//this method is super ugly
-	/**
-	 * 
-	 * @param records
-	 * 			records to filter
-	 * @return
-	 * @throws SQLException
-	 */
 	public static ArrayList<Record> filterRecords(ArrayList<Record> records) throws SQLException{
 		
 		//Code for when we have a session
@@ -73,7 +66,7 @@ public class DBAccess {
 			perms = rset.getString(1);
 		}
 		else{
-			System.err.println("something has gone horribly wrong, userName not found");
+			System.out.println("something has gone horribly wrong, userName not found");
 		}
 		
 		ArrayList<Record> toRemove = new ArrayList<Record>();

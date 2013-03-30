@@ -50,56 +50,41 @@ public class DBAccess {
 		return records;
 	}
 	
-	//this method is super ugly
-	/**
-	 * 
-	 * @param records
-	 * 			records to filter
-	 * @return
-	 * @throws SQLException
-	 */
 	public static ArrayList<Record> filterRecords(ArrayList<Record> records) throws SQLException{
-		
 		//Code for when we have a session
 		//String userName = (String) session.getAttribute("userName");
-		String userName = "dr. jones";
-		
+		String userName = "mike";
 		//figure out mike's permissions
 		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
 		Statement stmt = con.createStatement();
+		//big query to get back
 		ResultSet rset = stmt.executeQuery("Select class from users where user_name = '" + userName + "'");
-		String perms = "";
-		if(rset.next()){//to get to first result (should only be one)
-			perms = rset.getString(1);
-		}
-		else{
-			System.err.println("something has gone horribly wrong, userName not found");
-		}
+		String perms = rset.getString(1);
 		
-		ArrayList<Record> toRemove = new ArrayList<Record>();
 		//this is not how I should do this	
 		//dont look at this code it is uuugly
 		if(perms.equals("p")){
 			for(Record r : records){
 				if(!(r.getPatient_name().equals(userName))){
-					toRemove.add(r);
+					records.remove(r);
 				}
 			}
 		}
 		else if(perms.equals("d")){
 			for(Record r : records){
 				if(!(r.getDoctor_name().equals(userName))){
-					toRemove.add(r);				}
+					records.remove(r);
+				}
 			}
 		}
 		else if(perms.equals("r")){
 			for(Record r : records){
 				if(!(r.getRadiologist_name().equals(userName))){
-					toRemove.add(r);				}
+					records.remove(r);
+				}
 			}
 		}		
 		
-		records.removeAll(toRemove);
 		return records;
 	}
 

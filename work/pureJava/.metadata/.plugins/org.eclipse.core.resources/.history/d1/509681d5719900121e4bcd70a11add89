@@ -51,13 +51,6 @@ public class DBAccess {
 	}
 	
 	//this method is super ugly
-	/**
-	 * 
-	 * @param records
-	 * 			records to filter
-	 * @return
-	 * @throws SQLException
-	 */
 	public static ArrayList<Record> filterRecords(ArrayList<Record> records) throws SQLException{
 		
 		//Code for when we have a session

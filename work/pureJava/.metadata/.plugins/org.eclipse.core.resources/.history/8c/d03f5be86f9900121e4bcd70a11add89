@@ -19,7 +19,6 @@ public class QueryTest {
 		// TODO Auto-generated method stub
 		
 		ArrayList<Record> records = DBAccess.getRecords("keyword", true);
-		records = DBAccess.filterRecords(records);
 		for(Record r : records){
 			System.out.println(r.getTest_date().toString() + "  " + r.getRank());
 		}
