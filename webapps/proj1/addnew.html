@@ -13,22 +13,22 @@
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Class:</I></B></TD>
 <TD>
-<!-- issue, if you check a non-patient radiobutton and then refresh the page, the hidden fields will be displayed
+<!-- issue, if you check a nn-patient radiobutton and then refresh the page, the hidden fields will be displayed
 and h previous radiobutton will remain checked.  Most likely need some sort of javascript fix for this-->
 <!-- Show hide form fields from http://www.webdeveloper.com/forum/showthread.php?67756-show-and-hide-form-fields -->
 <!-- note that if the user goes from a patient to a nonpatient class the doctor field will be cleared, so we don' send that info to server-->
 <input type="radio" name="CLASS" value="doctor"  onclick="
  if (this.checked) {
-  	this.form.DOCTORNAME.value='';
-   this.form.DOCTORNAME.style.visibility='hidden';
-   document.getElementById('DOCLABEL').style.visibility='hidden';
+ 	this.form.DICTORNAME.value='';
+  	this.form.DOCTORNAME.style.visibility='hidden';
+	document.getElementById('DOCLABEL').style.visibility='hidden';
  } 
  return true;">Doctor
 <input type="radio" name="CLASS" value="admin"  onclick="
  if (this.checked) {
   	this.form.DOCTORNAME.value='';
    this.form.DOCTORNAME.style.visibility='hidden';
-   document.getElementById('DOCLABEL').style.visibility='hidden';
+   this.form.DOCLABEL.style.visibility='hidden';
  } 
  return true;">Admin
 <input type="radio" name="CLASS" value="radiologist"  onclick="
