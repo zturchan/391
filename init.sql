@@ -29,7 +29,7 @@ INSERT INTO PERSONS values('pzero','Patient','Zero','000 diseased ave.','0@0.oo'
 
 --Create some radiologists
 INSERT INTO USERS values('radioactiveman','rad','r', CURRENT_DATE);
-INSERT INTO PERSONS values('radioactiiveman','Radio-Active','Man','868 Evergreen Terrace','rad@rad.co.uk','5559995559');
+INSERT INTO PERSONS values('radioactiveman','Radio-Active','Man','868 Evergreen Terrace','rad@rad.co.uk','5559995559');
 INSERT INTO USERS values('nuker','zerg','r', CURRENT_DATE);
 INSERT INTO PERSONS values('nuker','Sarah','Kerrigan','Koprulu Sector','sarah@dominion.com','1233214565');
 INSERT INTO USERS values('tester','test','r', CURRENT_DATE);
