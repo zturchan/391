@@ -29,5 +29,14 @@
         <servlet-name>Getinfo</servlet-name>
         <url-pattern>/getinfo</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>UploadImage</servlet-name>
+        <servlet-class>UploadImage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>UploadImage</servlet-name>
+        <url-pattern>/UploadImage</url-pattern>
+    </servlet-mapping>
+
 
 </web-app>
