@@ -49,5 +49,24 @@
         <servlet-name>GetUserinfo</servlet-name>
         <url-pattern>/getuserinfo</url-pattern>
     </servlet-mapping>
->>>>>>> 96937f397cf0264cc683e98a643a6f1f08495ec0
+
+    <servlet>
+        <servlet-name>picturebrowse</servlet-name>
+        <servlet-class>picturebrowse</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>picturebrowse</servlet-name>
+        <url-pattern>/picturebrowse</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>oneimage</servlet-name>
+        <servlet-class>oneimage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>oneimage</servlet-name>
+        <url-pattern>/oneimage</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>
