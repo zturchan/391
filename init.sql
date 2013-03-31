@@ -1,4 +1,11 @@
 --Make sure you run @setup.sql first to clear/create tables.
+drop sequence test_seq;
+drop sequence pic_id_sequence;
+
+--Create sequences for auto-generating ids
+create sequence test_seq start with 1 increment by 1 nomaxvalue; 
+create sequence pic_id_sequence start with 1 increment by 1 nomaxvalue; 
+
 --Create some administrators
 INSERT INTO USERS values('admin','admin','a', CURRENT_DATE);
 INSERT INTO PERSONS values('admin','Zak','Turchansky','325 Bulyea Road','zturchan@ualberta.ca','7804375528');
@@ -40,6 +47,13 @@ INSERT INTO FAMILY_DOCTOR values('who','english');
 INSERT INTO FAMILY_DOCTOR values('who','gst');
 INSERT INTO FAMILY_DOCTOR values('dre','gst');
 INSERT INTO FAMILY_DOCTOR values('psychatog','flash');
+
+
+--Create some radiology records
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'english', 'dre', 'radioactiveman', 'Blood tests', '01-Jan-2013', '12-Dec-2012', 'Overdose', 'Metabolites of oxycodone and hydromorphone detected');
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'flash', 'psychatog', 'nuker', 'X-ray', '08-Jan-2013', '07-Jan-2013', 'Wrist injury', 'Carpal tunnel syndrome');
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'gst', 'who', 'nuker', 'MRI Scan', '08-Feb-2013', '03-Feb-2013', 'Stomach abscess', 'Possibly carcinogenic');
+
 
 
 
