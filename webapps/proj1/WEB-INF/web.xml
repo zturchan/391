@@ -29,6 +29,7 @@
         <servlet-name>Getinfo</servlet-name>
         <url-pattern>/getinfo</url-pattern>
     </servlet-mapping>
+
     <servlet>
         <servlet-name>UploadImage</servlet-name>
         <servlet-class>UploadImage</servlet-class>
@@ -39,4 +40,14 @@
     </servlet-mapping>
 
 
+
+    <servlet>
+        <servlet-name>GetUserinfo</servlet-name>
+        <servlet-class>getuserinfo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserinfo</servlet-name>
+        <url-pattern>/getuserinfo</url-pattern>
+    </servlet-mapping>
+>>>>>>> 96937f397cf0264cc683e98a643a6f1f08495ec0
 </web-app>

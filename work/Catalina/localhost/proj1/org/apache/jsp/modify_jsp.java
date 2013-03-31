@@ -113,17 +113,6 @@ if(!rset.next()){
 //So if we get here, we're authenticated.
 try {
 	
-/*
-sql = "select PASSWORD from users where USER_NAME = '"+sessionUserName+"'";
-	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	rset = stmt.executeQuery(sql);
-	rset.absolute(1);
-	rset.updateString(1,newPass);
-	rset.updateRow();
-	ResultSet newRset = stmt.executeQuery(sql);
-	while(newRset.next()){
-		javax.swing.JOptionPane.showMessageDialog(null, "Password Successfully Changed.");
-		*/
 	sql = "select first_name,last_name,address,email,phone from persons where USER_NAME = '"+username+"'";
 	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 	rset = stmt.executeQuery(sql);
