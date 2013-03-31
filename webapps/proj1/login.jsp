@@ -41,11 +41,24 @@ catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
 String truepwd = "";
+String userClass = "";
 while(rset != null && rset.next())
 	truepwd = (rset.getString(1)).trim();
 //display the result
 if(passwd.equals(truepwd)){
 	session.setAttribute("userName", userName);
+	userClass = "select CLASS from users where USER_NAME = '"+userName+"'";
+	try{
+		stmt = conn.createStatement();
+		rset = stmt.executeQuery(userClass);
+	}
+	catch(Exception ex){
+	out.println("<hr>" + ex.getMessage() + "<hr>");
+	}
+	while(rset != null && rset.next())
+	userClass = (rset.getString(1)).trim();
+	session.setAttribute("userClass", userClass);
+
 	response.sendRedirect("../proj1/home.html");    
 }
 else {
