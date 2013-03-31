@@ -119,12 +119,16 @@ public final class newmodify_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print( email );
       out.write("'></TD>\n");
       out.write("</TR>\n");
+ if(classid.equals("p")){ 
+      out.write("\n");
       out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
       out.write("<TD ID=\"DOCLABEL\"><B><I>Family Doctor (Separate multiples by commas, old ones will be deleted):</I></B></TD>\n");
       out.write("<TD><INPUT TYPE=\"text\" NAME=\"DOCTORNAME\" VALUE='");
       out.print( docs );
       out.write("'></TD>\n");
       out.write("</TR>\n");
+ } 
+      out.write("\n");
       out.write("\n");
       out.write("\n");
       out.write("</TR>\n");

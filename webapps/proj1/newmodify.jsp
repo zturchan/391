@@ -50,10 +50,12 @@
 <TD><B><I>Email:</I></B></TD>
 <TD><INPUT TYPE="text" NAME="EMAIL" VALUE='<%= email %>'></TD>
 </TR>
+<% if(classid.equals("p")){ %>
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD ID="DOCLABEL"><B><I>Family Doctor (Separate multiples by commas, old ones will be deleted):</I></B></TD>
 <TD><INPUT TYPE="text" NAME="DOCTORNAME" VALUE='<%= docs %>'></TD>
 </TR>
+<% } %>
 
 
 </TR>

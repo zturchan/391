@@ -3,8 +3,8 @@
 <TITLE>RIS - Add New Person</TITLE>
 <link rel="stylesheet" type="text/css" href="style.css" />	
 </HEAD>
-
-<BODY>
+<!-- radio refresh consistency code from http://www.htmlhelpcentral.com/messageboard/showthread.php?17054-Reset-radio-buttons-on-refresh -->
+<BODY onload="var e=document.getElementsByTagName('input');var i=0;while(i<e.length){if(e[i++].type=='radio'){e[i].checked=false;}}">
 <div id="content">
 		
 <H1><CENTER>Add New Person</CENTER></H1>
@@ -21,7 +21,7 @@ and h previous radiobutton will remain checked.  Most likely need some sort of j
 <!-- note that if the user goes from a patient to a nonpatient class the doctor field will be cleared, so we don' send that info to server-->
 <input type="radio" name="CLASS" value="doctor"  onclick="
  if (this.checked) {
- 	this.form.DICTORNAME.value='';
+ 	this.form.DOCTORNAME.value='';
   	this.form.DOCTORNAME.style.visibility='hidden';
 	document.getElementById('DOCLABEL').style.visibility='hidden';
  } 
@@ -30,7 +30,7 @@ and h previous radiobutton will remain checked.  Most likely need some sort of j
  if (this.checked) {
   	this.form.DOCTORNAME.value='';
    this.form.DOCTORNAME.style.visibility='hidden';
-   this.form.DOCLABEL.style.visibility='hidden';
+	document.getElementById('DOCLABEL').style.visibility='hidden';
  } 
  return true;">Admin
 <input type="radio" name="CLASS" value="radiologist"  onclick="
