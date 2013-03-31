@@ -85,12 +85,15 @@ try {
 	ps.setString(6,phone);
 	ps.executeUpdate();
 	
-	if(classid.equals("p")){
+
+	if(classid.trim().equals("p")){
 		String[] docs = doctors.split(",");
 		for (int i = 0; i < docs.length; i++){
 			ps = conn.prepareStatement("insert into family_doctor(doctor_name,patient_name) values(?,?)");
+			//out.println(docs[i]);
 			ps.setString(1,docs[i]);
 			ps.setString(2,username);
+			ps.executeUpdate();
 		}
 		
 	}

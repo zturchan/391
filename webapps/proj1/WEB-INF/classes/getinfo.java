@@ -70,6 +70,7 @@ public class getinfo extends HttpServlet {
 		conn.close();
 	}
 	catch(Exception ex){
+		javax.swing.JOptionPane.showMessageDialog(null, "There was an error connecting to the database.  Please ensure you have entered a valid username");
 		out.println("<hr>" + ex.getMessage() + "<hr>");
 	}
 	

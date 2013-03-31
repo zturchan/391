@@ -62,7 +62,7 @@ public final class modify_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
 
 
-String username = (request.getParameter("USERNAME")).trim();
+String username = (request.getParameter("user")).trim();
 String first = (request.getParameter("FIRST")).trim();
 String last = (request.getParameter("LAST")).trim();
 String add = (request.getParameter("ADDRESS")).trim();

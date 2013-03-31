@@ -139,55 +139,23 @@ try {
 	ps.setString(6,phone);
 	ps.executeUpdate();
 	
-	if(classid.equals("p")){
+
+	if(classid.trim().equals("p")){
 		String[] docs = doctors.split(",");
 		for (int i = 0; i < docs.length; i++){
 			ps = conn.prepareStatement("insert into family_doctor(doctor_name,patient_name) values(?,?)");
+			//out.println(docs[i]);
 			ps.setString(1,docs[i]);
 			ps.setString(2,username);
+			ps.executeUpdate();
 		}
 		
 	}
-/*	rset = stmt.executeQuery(sql);
-	rset.moveToInsertRow();
-	rset.updateString(1,username);
-	rset.updateString(2,password);
-	rset.updateString(3,classid);
-	rset.updateDate(4,CURRENT_DATE);
-	rset.insertRow();
-*/	
-/*
-              stmt = m_con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-              ResultSet rset = stmt.executeQuery(queryString);
-
-	      rset.moveToInsertRow();
-	      rset.updateString(1,"TRIADBURY");
-	      rset.updateInt(2,2000);
-	      rset.updateDouble(3,8.00);
-	      rset.updateInt(4,9999);
-	      rset.updateInt(5 ,6666);
-
-	      rset.insertRow();
-
-*/	
-	
-	
-//	sql = "select PASSWORD from users where USER_NAME = '"+sessionUserName+"'";
-//	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-//	rset = stmt.executeQuery(sql);
-//	rset.absolute(1);
-//	rset.updateString(1,newPass);
-//	rset.updateRow();
-//	ResultSet newRset = stmt.executeQuery(sql);
-//	while(newRset.next()){
-//		javax.swing.JOptionPane.showMessageDialog(null, "Password Successfully Changed.");
-//		//out.println("New pass is: " + newRset.getString(1));
-//	}
 	javax.swing.JOptionPane.showMessageDialog(null, "User "+username+" successfully added to the database.");
 	ps.close();
 	stmt.close();
     conn.close();
-    response.sendRedirect("../proj1/home.html");
+    //response.sendRedirect("../proj1/home.html");
 }
 catch(SQLException ex) {
 	System.err.println("SQLException: " +

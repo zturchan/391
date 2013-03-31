@@ -19,7 +19,15 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>URLSession</servlet-name>
-        <url-pattern>/urlsession</url-pattern>
+        <url-pattern>/URLSession</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>getinfo</servlet-name>
+        <servlet-class>getinfo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getinfo</servlet-name>
+        <url-pattern>/getinfo</url-pattern>
     </servlet-mapping>
 
 </web-app>
