@@ -52,7 +52,7 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
 <table>
 <tr align="left">
 <th>Record ID:</th>
-<td><input type="text" name="recid"></td>
+<td><input type="text" name="recordID"></td>
 </tr>
 <tr align="left">
 <th>Image File:</th>
