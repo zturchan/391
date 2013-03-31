@@ -29,5 +29,12 @@
         <servlet-name>Getinfo</servlet-name>
         <url-pattern>/getinfo</url-pattern>
     </servlet-mapping>
-
+	<servlet>
+        <servlet-name>GetUserinfo</servlet-name>
+        <servlet-class>getuserinfo</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>GetUserinfo</servlet-name>
+        <url-pattern>/getuserinfo</url-pattern>
+    </servlet-mapping>
 </web-app>

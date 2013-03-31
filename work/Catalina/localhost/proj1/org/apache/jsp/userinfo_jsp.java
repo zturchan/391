@@ -4,6 +4,7 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.*;
+import java.util.*;
 
 public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -53,85 +54,73 @@ public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("<HTML>\n");
       out.write("<HEAD>\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\t\n");
       out.write("<TITLE>RIS</TITLE>\n");
       out.write("</HEAD>\n");
       out.write("\n");
       out.write("<BODY>\n");
-      out.write("\n");
-
-String newFirst = (request.getParameter("FIRST")).trim();
-String newLast = (request.getParameter("LAST")).trim();
-String newAdd = (request.getParameter("ADDRESS")).trim();
-String newEmail = (request.getParameter("EMAIL")).trim();
-String newPhone = (request.getParameter("PHONE")).trim();
-
-//establish the connection to the underlying database
-Connection conn = null;
-String driverName = "oracle.jdbc.driver.OracleDriver";
-String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
-try{
-	//load and register the driver
-	Class drvClass = Class.forName(driverName);
-	DriverManager.registerDriver((Driver) drvClass.newInstance());
-}
-catch(Exception ex){
-	out.println("<hr>" + ex.getMessage() + "<hr>");
-}
-try{
-	//establish the connection
-	conn = DriverManager.getConnection(dbstring,"zturchan","Pikachu1");
-    conn.setAutoCommit(false);
-}
-catch(Exception ex){
-	out.println("<hr>" + ex.getMessage() + "<hr>");
-}
-String sessionUserName = (String) session.getAttribute("userName");
-//select the user table from the underlying db and validate the user name and password
-Statement stmt = null;
-ResultSet rset = null;
-String sql = "select USER_NAME from users where USER_NAME = '"+sessionUserName+"'";
-try{
-	stmt = conn.createStatement();
-	rset = stmt.executeQuery(sql);
-}
-catch(Exception ex){
-	out.println("<hr>" + ex.getMessage() + "<hr>");
-}
-if(!rset.next()){
-	//If we're not a curently authenticated user, redirect to login
-	//This should also implement timeout functionality as added bonus
-	javax.swing.JOptionPane.showMessageDialog(null, "You cannot perform that action.  Please authenticate first.");
-	response.sendRedirect("../proj1/login.html");
-}
-
-//out.println("Should be a real session user");
-//So if we get here, we're authenticated.
-try {
-	sql = "select FIRST_NAME, LAST_NAME, ADDRESS, EMAIL, PHONE from persons where USER_NAME = '"+sessionUserName+"'";
-	//out.println(sql);
-	stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-	rset = stmt.executeQuery(sql);
-	rset.absolute(1);
-	rset.updateString(1,newFirst);
-	rset.updateString(2,newLast);
-	rset.updateString(3,newAdd);	
-	rset.updateString(4,newEmail);
-	rset.updateString(5,newPhone);		 
-	rset.updateRow();
-	ResultSet newRset = stmt.executeQuery(sql);
-	stmt.close();
-    conn.close();
-    javax.swing.JOptionPane.showMessageDialog(null, "Personal Information Changed:\n"+newFirst+ " " + newLast +"\n"+newAdd+"\n" + newPhone +"\n"+newEmail);
-    response.sendRedirect("../proj1/home.html");
-}
-catch(SQLException ex) {
-	System.err.println("SQLException: " +
-	ex.getMessage());
-}
-
+      out.write("<div id=\"content\">\n");
       out.write("\n");
       out.write("\n");
+
+	String username = request.getParameter("user");
+	String first = request.getParameter("first");
+	String last = request.getParameter("last");
+	String phone = request.getParameter("phone");
+	String address = request.getParameter("address");
+	String email = request.getParameter("email");	
+
+
       out.write("\n");
+      out.write("<H1><CENTER>Modifying ");
+      out.print( username );
+      out.write("'s Information</CENTER></H1>\n");
+      out.write("\n");
+      out.write("<FORM NAME=\"ModForm\" ACTION=\"updateuser.jsp?user=");
+      out.print( username );
+      out.write("\" METHOD=\"post\" >\n");
+      out.write("<TABLE>\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>First Name:</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"text\" NAME=\"FIRST\" VALUE='");
+      out.print( first );
+      out.write("'><BR></TD>\n");
+      out.write("</TR>\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>Last Name:</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"text\" NAME=\"LAST\" VALUE='");
+      out.print( last );
+      out.write("'></TD>\n");
+      out.write("</TR>\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>Address:</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"text\" NAME=\"ADDRESS\" VALUE='");
+      out.print( address );
+      out.write("'></TD>\n");
+      out.write("</TR>\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>Phone Number  (up to 10 characters):</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"text\" NAME=\"PHONE\" VALUE='");
+      out.print( phone );
+      out.write("'></TD>\n");
+      out.write("</TR>\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>Email:</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"text\" NAME=\"EMAIL\" VALUE='");
+      out.print( email );
+      out.write("'></TD>\n");
+      out.write("</TR>\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("</TR>\n");
+      out.write("</TABLE>\n");
+      out.write("\n");
+      out.write("<INPUT TYPE=\"submit\" VALUE=\"Update Info\">\n");
+      out.write("</FORM>\n");
+      out.write("</div>\n");
+      out.write("<div id=\"footer\">\n");
+      out.write("<a href=\"../proj1/logout.jsp\">Logout</a>\n");
+      out.write("</div>\n");
       out.write("</BODY>\n");
       out.write("</HTML>\n");
       out.write("\n");

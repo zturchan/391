@@ -22,11 +22,11 @@
         <url-pattern>/URLSession</url-pattern>
     </servlet-mapping>
     <servlet>
-        <servlet-name>getinfo</servlet-name>
+        <servlet-name>Getinfo</servlet-name>
         <servlet-class>getinfo</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>getinfo</servlet-name>
+        <servlet-name>Getinfo</servlet-name>
         <url-pattern>/getinfo</url-pattern>
     </servlet-mapping>
 
