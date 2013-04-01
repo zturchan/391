@@ -57,12 +57,3 @@ INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'gst', 'who', 'nuker', 'MR
 
 
 
-
-
-
-
-
-
-
-
-
