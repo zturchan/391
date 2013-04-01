@@ -56,10 +56,11 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</head>\n");
       out.write("\n");
 
+if (session.getAttribute("userClass") != null){
 String userClass = (String)session.getAttribute("userClass");
 if (!userClass.equals("r")) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
-}
+}}
 
       out.write("\n");
       out.write("\n");

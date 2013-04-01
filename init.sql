@@ -4,7 +4,7 @@ drop sequence pic_id_sequence;
 
 --Create sequences for auto-generating ids
 create sequence test_seq start with 1 increment by 1 nomaxvalue; 
-create sequence pic_id_sequence start with 1 increment by 1 nomaxvalue; 
+create sequence pic_id_sequence start with 4 increment by 1 nomaxvalue; 
 
 --Create some administrators
 INSERT INTO USERS values('admin','admin','a', CURRENT_DATE);

@@ -4,10 +4,11 @@
 </head>
 
 <%
+if (session.getAttribute("userClass") != null){
 String userClass = (String)session.getAttribute("userClass");
 if (!userClass.equals("r")) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
-}
+}}
 %>
 
 
