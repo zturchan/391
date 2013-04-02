@@ -50,9 +50,9 @@ INSERT INTO FAMILY_DOCTOR values('psychatog','flash');
 
 
 --Create some radiology records
-INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'english', 'dre', 'radioactiveman', 'Blood tests', '01-Jan-2013', '12-Dec-2012', 'Overdose', 'Metabolites of oxycodone and hydromorphone detected');
-INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'flash', 'psychatog', 'nuker', 'X-ray', '08-Jan-2013', '07-Jan-2013', 'Wrist injury', 'Carpal tunnel syndrome');
-INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'gst', 'who', 'nuker', 'MRI Scan', '08-Feb-2013', '03-Feb-2013', 'Stomach abscess', 'Possibly carcinogenic');
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'english', 'dre', 'radioactiveman', 'Blood tests', '01-Jan-2013', '12-Dec-2012', 'overdose', 'Metabolites of oxycodone and hydromorphone detected');
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'flash', 'psychatog', 'nuker', 'X-ray', '08-Jan-2013', '07-Jan-2013', 'wrist injury', 'carpal tunnel syndrome');
+INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'gst', 'who', 'nuker', 'MRI Scan', '08-Feb-2013', '03-Feb-2013', 'stomach abscess', 'Possibly carcinogenic');
 
 
 

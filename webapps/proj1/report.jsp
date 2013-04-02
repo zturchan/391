@@ -1,3 +1,4 @@
+<html>
 <%@ page import="java.sql.*" %>
 <head>
 <title>Report Module</title>
@@ -12,11 +13,14 @@ if (!userClass.equals("r")) {
 out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
 }}
 %>
-
-
-
-
-<select>
+<h2>Uploading Module</h2>
+<hr />
+<form name="reportGen" method="POST"  action="reportgen.jsp">
+<table>
+<tr align="left">
+<th>Diagnosis</th>
+<td>
+<select name="diagnosis">
 <%
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -41,7 +45,7 @@ catch(Exception ex){
 
 Statement stmt = null;
 ResultSet rset = null;
-String sql = "select diagnosis from radiology_record";
+String sql = "select distinct diagnosis from radiology_record";
 try{
 stmt = conn.createStatement();
 rset = stmt.executeQuery(sql);
@@ -62,8 +66,23 @@ while (rset.next() ) {
 conn.close();
 %>
 </select>
-
-
+</td>
+</tr>
+<tr>
+<th>
+Start Date:
+</th>
+<td><input type="text" name="startDate" value="01-Jan-2013"></td>
+</tr>
+<tr>
+<th>
+End Date:
+</th>
+<td><input type="text" name="endDate" value="01-Jan-2013"></td>
+</tr>
+</table>
+<input type="submit" name="submit" VALUE="Generate Report">
+</form>
 
 <div id="footer">
 <a href="../proj1/logout.jsp">Logout</a>

@@ -13,7 +13,7 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
 %>
 
 
-<h1>Uploading Module</h1>
+<h2>Uploading Module</h2>
 <hr />
 
 <h3>Add a New Radiology Record to Database</h3>	
@@ -33,11 +33,11 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
 </tr>
 <tr align="left">
 <th>Prescribing Date:</th>
-<td><input type="text" name="prescribingDate"></td>
+<td><input type="text" name="prescribingDate" value="01-Jan-2013"></td>
 </tr>
 <tr align="left">
 <th>Test Date:</th>
-<td><input type="text" name="testDate"></td>
+<td><input type="text" name="testDate" value="01-Jan-2013"></td>
 </tr>
 <tr align="left">
 <th>Diagnosis:</th>

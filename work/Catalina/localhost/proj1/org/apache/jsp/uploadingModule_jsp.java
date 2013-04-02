@@ -84,7 +84,7 @@ catch(Exception ex){
 	String testType = request.getParameter("testType");
 	String prescribingDate = request.getParameter("prescribingDate");
 	String testDate = request.getParameter("testDate");
-	String diagnosis = request.getParameter("diagnosis");
+	String diagnosis = request.getParameter("diagnosis").toLowerCase();
 	String description = request.getParameter("description");
 
 

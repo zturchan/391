@@ -4,8 +4,9 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.*;
+import java.util.*;
 
-public final class report_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class reportgen_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -51,30 +52,14 @@ public final class report_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
-      out.write("<html>\n");
       out.write("\n");
+      out.write("\n");
+      out.write("<html>\n");
       out.write("<head>\n");
       out.write("<title>Report Module</title>\n");
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n");
       out.write("</head>\n");
       out.write("\n");
-      out.write("\n");
-
-if (session.getAttribute("userClass") != null){
-String userClass = (String)session.getAttribute("userClass");
-if (!userClass.equals("r")) {
-out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
-}}
-
-      out.write("\n");
-      out.write("<h2>Uploading Module</h2>\n");
-      out.write("<hr />\n");
-      out.write("<form name=\"reportGen\" method=\"POST\"  action=\"reportgen.jsp\">\n");
-      out.write("<table>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Diagnosis</th>\n");
-      out.write("<td>\n");
-      out.write("<select name=\"diagnosis\">\n");
 
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -97,47 +82,49 @@ catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
 
-Statement stmt = null;
+String startDate = request.getParameter("startDate");
+String endDate = request.getParameter("endDate");
+String diagnosis = request.getParameter("diagnosis");
+
+PreparedStatement stmt = null;
 ResultSet rset = null;
-String sql = "select distinct diagnosis from radiology_record";
-try{
-stmt = conn.createStatement();
-rset = stmt.executeQuery(sql);
+String sql = "select p.user_name, p.first_name, p.last_name, p.address, p.phone,  to_char(r.test_date, 'DD-MON-YYYY') as test_date, r.record_id from persons p, radiology_record r where r.diagnosis = ? and p.user_name = r.patient_name and r.test_date BETWEEN ? and ? ORDER BY r.test_date asc";
+    
+ 
+stmt = conn.prepareStatement(sql);
+stmt.setString(1, diagnosis);
+stmt.setString(2, startDate);
+stmt.setString(3, endDate);
+rset = stmt.executeQuery();
 
-conn.commit();
+out.println("<h2>Diagnosis: " + diagnosis + "</h2>");
+out.println("<h2>Start Date: " + startDate + "</h2>");
+out.println("<h2>End Date: " + endDate + "</h2>");
 
 
+out.println("<table border='1'>");
+out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th>First Test Date</th></tr>");
+ArrayList<String> names=new ArrayList<String>();
+while (rset != null && rset.next()){
+String name = rset.getString(1).trim();
+if(!names.contains(name)){
+     names.add(name);
+
+out.println("<tr><td>"+name+"</td>");
+out.println("<td>"+rset.getString(2).trim()+"</td>");
+out.println("<td>"+rset.getString(3).trim()+"</td>");
+out.println("<td>"+rset.getString(4).trim()+"</td>");
+out.println("<td>"+rset.getString(5).trim()+"</td>");
+out.println("<td>"+rset.getString(6).trim()+"</td></tr>");
 }
-     catch(Exception ex){
-         out.println("<hr>" + ex.getMessage() + "<hr>");
 }
-
-while (rset.next() ) {
-	out.println("<option>"+rset.getString(1)+"</option>");
-}
-
- stmt.close();
+out.println("</table>");
+out.println("<br /><a href='../proj1/report.jsp'>Back</a><br />");
+out.println("<a href='../proj1/home.jsp'>Home</a><br />");
+stmt.close();
 conn.close();
 
       out.write("\n");
-      out.write("</select>\n");
-      out.write("</td>\n");
-      out.write("</tr>\n");
-      out.write("<tr>\n");
-      out.write("<th>\n");
-      out.write("Start Date:\n");
-      out.write("</th>\n");
-      out.write("<td><input type=\"text\" name=\"startDate\" value=\"01-Jan-2013\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr>\n");
-      out.write("<th>\n");
-      out.write("End Date:\n");
-      out.write("</th>\n");
-      out.write("<td><input type=\"text\" name=\"endDate\" value=\"01-Jan-2013\"></td>\n");
-      out.write("</tr>\n");
-      out.write("</table>\n");
-      out.write("<input type=\"submit\" name=\"submit\" VALUE=\"Generate Report\">\n");
-      out.write("</form>\n");
       out.write("\n");
       out.write("<div id=\"footer\">\n");
       out.write("<a href=\"../proj1/logout.jsp\">Logout</a>\n");
