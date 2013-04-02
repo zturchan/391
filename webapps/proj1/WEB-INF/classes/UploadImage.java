@@ -76,7 +76,7 @@ public class UploadImage extends HttpServlet {
 			Iterator i = FileItems.iterator();
 			FileItem item = (FileItem) i.next();
 			while (i.hasNext() && item.isFormField()) {
-				if(item.getFieldName().equals("recordID"))
+				if(item.getFieldName().equals("dropdownID"))
 					recordID = Integer.parseInt(item.getString());
 				item = (FileItem) i.next();
 			}

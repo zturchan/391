@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import java.sql.*;
 
-public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
+public final class report_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
 
   private static final JspFactory _jspxFactory = JspFactory.getDefaultFactory();
@@ -53,66 +53,24 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("\n");
       out.write("<head>\n");
-      out.write("<title>Uploading Module</title>\n");
+      out.write("<title>Report Module</title>\n");
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n");
       out.write("</head>\n");
+      out.write("\n");
       out.write("\n");
 
 if (session.getAttribute("userClass") != null){
 String userClass = (String)session.getAttribute("userClass");
 if (!userClass.equals("r")) {
-out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
+out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
 }}
 
       out.write("\n");
       out.write("\n");
       out.write("\n");
-      out.write("<h1>Uploading Module</h1>\n");
-      out.write("<hr />\n");
       out.write("\n");
-      out.write("<h3>Add a New Radiology Record to Database</h3>\t\n");
-      out.write("<form name=\"newRecord\" action=\"uploadingModule.jsp\" method=\"post\">\n");
-      out.write("<table>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Patient name:</th>\n");
-      out.write("<td><input type=\"text\" name=\"patientName\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Doctor name:</th>\n");
-      out.write("<td><input type=\"text\" name=\"doctorName\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Test type:</th>\n");
-      out.write("<td><input type=\"text\" name=\"testType\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Prescribing Date:</th>\n");
-      out.write("<td><input type=\"text\" name=\"prescribingDate\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Test Date:</th>\n");
-      out.write("<td><input type=\"text\" name=\"testDate\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Diagnosis:</th>\n");
-      out.write("<td><input type=\"text\" name=\"diagnosis\"></td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Description:</th>\n");
-      out.write("<td><textarea cols=\"40\" rows=\"4\" name=\"description\"></textarea></td>\n");
-      out.write("</tr>\n");
-      out.write("</table>\n");
-      out.write("<input type=\"submit\" name=\"submit\" VALUE=\"Add Record\">\n");
-      out.write("</form>\t\n");
       out.write("\n");
-      out.write("<hr>\n");
-      out.write("<h3>Add A Medical Image to An Existing Record</h3>\n");
-      out.write("<form name=\"uploadImage\" method=\"POST\" ENCtype=\"multipart/form-data\" action=\"UploadImage\">\n");
-      out.write("<table>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Record ID:</th>\n");
-      out.write("<td>\n");
-      out.write("<select name=\"dropdownID\">\n");
+      out.write("<select>\n");
 
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -137,7 +95,7 @@ catch(Exception ex){
 
 Statement stmt = null;
 ResultSet rset = null;
-String sql = "select record_id from radiology_record";
+String sql = "select diagnosis from radiology_record";
 try{
 stmt = conn.createStatement();
 rset = stmt.executeQuery(sql);
@@ -159,16 +117,9 @@ conn.close();
 
       out.write("\n");
       out.write("</select>\n");
-      out.write("</td>\n");
-      out.write("</tr>\n");
-      out.write("<tr align=\"left\">\n");
-      out.write("<th>Image File:</th>\n");
-      out.write("<td><input type=\"file\"  name=\"imagePath\"></td>\n");
-      out.write("</tr>\n");
-      out.write("</table>\n");
       out.write("\n");
-      out.write("<input type=\"submit\" name=\"uploadImageSubmit\" VALUE=\"Upload Image\">\n");
-      out.write("</form>\n");
+      out.write("\n");
+      out.write("\n");
       out.write("<div id=\"footer\">\n");
       out.write("<a href=\"../proj1/logout.jsp\">Logout</a>\n");
       out.write("</div>\t\n");
