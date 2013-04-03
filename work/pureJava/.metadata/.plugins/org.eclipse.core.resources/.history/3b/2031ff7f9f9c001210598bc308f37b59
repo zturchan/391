@@ -31,7 +31,12 @@ public class DBAccess {
 		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
 		Statement stmt = con.createStatement();
 		//big query to get back
-
+		System.out.println("SELECT score(1), score(2), score(3), record_id, patient_name, " +
+				"doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +
+				" FROM radiology_record WHERE (contains(patient_name, '"+searchTerm+"', 1) > 0 or " +
+				"contains(diagnosis, '"+searchTerm+"', 2) > 0 or " +
+				"contains(description, '"+searchTerm+"', 3) > 0) or " +
+				"(test_date > "+ startDate + " and test_date < " + endDate + ") order by test_date desc");
 		ResultSet rset = stmt
 				.executeQuery("SELECT score(1), score(2), score(3), record_id, patient_name, " +
 						"doctor_name, radiologist_name, test_type, prescribing_date, test_date, diagnosis, description" +

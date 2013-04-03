@@ -54,6 +54,51 @@ INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'english', 'dre', 'radioac
 INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'flash', 'psychatog', 'nuker', 'X-ray', '08-Jan-2013', '07-Jan-2013', 'wrist injury', 'carpal tunnel syndrome');
 INSERT INTO RADIOLOGY_RECORD values(test_seq.nextval, 'gst', 'who', 'nuker', 'MRI Scan', '08-Feb-2013', '03-Feb-2013', 'stomach abscess', 'Possibly carcinogenic');
 
+--Make indexes
+create index name_index on radiology_record(patient_name) indextype is ctxsys.context;
+create index diagnosis_index on radiology_record(diagnosis) indextype is ctxsys.context;
+create index description_index on radiology_record(description) indextype is ctxsys.context;
+
+--Make indexes update
+define idxname = "name_index"
+define interval = "3/1440"
+
+set serveroutput on
+declare
+  job number;
+begin
+  dbms_job.submit(job, 'ctx_ddl.sync_index(''&idxname'');',
+                  interval=>'SYSDATE+&interval/1440');
+  commit;
+  dbms_output.put_line('job '||job||' has been submitted.');
+end;
+
+idxname = "diagnosis_index"
+interval = "3/1440"
+
+set serveroutput on
+declare
+  job number;
+begin
+  dbms_job.submit(job, 'ctx_ddl.sync_index(''&idxname'');',
+                  interval=>'SYSDATE+&interval/1440');
+  commit;
+  dbms_output.put_line('job '||job||' has been submitted.');
+end;
+
+idxname = "description_index"
+interval = "3/1440"
+
+set serveroutput on
+declare
+  job number;
+begin
+  dbms_job.submit(job, 'ctx_ddl.sync_index(''&idxname'');',
+                  interval=>'SYSDATE+&interval/1440');
+  commit;
+  dbms_output.put_line('job '||job||' has been submitted.');
+end;
+
 
 
 

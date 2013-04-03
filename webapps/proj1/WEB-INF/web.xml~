@@ -59,4 +59,14 @@
         <url-pattern>/picturebrowse</url-pattern>
     </servlet-mapping>
 
+    <servlet>
+        <servlet-name>oneimage</servlet-name>
+        <servlet-class>oneimage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>oneimage</servlet-name>
+        <url-pattern>/oneimage</url-pattern>
+    </servlet-mapping>
+
+
 </web-app>

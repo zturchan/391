@@ -39,7 +39,14 @@
         <url-pattern>/UploadImage</url-pattern>
     </servlet-mapping>
 
-
+    <servlet>
+        <servlet-name>DBAccess</servlet-name>
+        <servlet-class>DBAccess</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>DBAccess</servlet-name>
+        <url-pattern>/dbaccess</url-pattern>
+    </servlet-mapping>
 
     <servlet>
         <servlet-name>GetUserinfo</servlet-name>
