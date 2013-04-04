@@ -25,7 +25,7 @@
 <TD><B><I>Start Date: (yyyy-mm-dd)</I></B></TD>
 <TD><INPUT TYPE="text" NAME="startdate" VALUE=""><BR></TD>
 </TR>
-<TD><B><I>Keywords: (yyyy-mm-dd)</I></B></TD>
+<TD><B><I>End Date: (yyyy-mm-dd)</I></B></TD>
 <TD><INPUT TYPE="text" NAME="enddate" VALUE=""><BR></TD>
 </TR>
 </TABLE>

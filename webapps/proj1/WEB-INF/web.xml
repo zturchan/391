@@ -49,6 +49,15 @@
     </servlet-mapping>
 
     <servlet>
+        <servlet-name>OLAP</servlet-name>
+        <servlet-class>OLAP</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OLAP</servlet-name>
+        <url-pattern>/olap</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
         <servlet-name>GetUserinfo</servlet-name>
         <servlet-class>getuserinfo</servlet-class>
     </servlet>

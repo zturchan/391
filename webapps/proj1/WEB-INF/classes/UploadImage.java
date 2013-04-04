@@ -1,11 +1,8 @@
 /***
- *  A sample program to demonstrate how to use servlet to 
- *  load an image file from the client disk via a web browser
+ *  adapted from Fan Deng's sample progrm
+ *  This servlet load an image file from the client disk via a web browser
  *  and insert the image into a table in Oracle DB.
- *  
- *  Copyright 2005 COMPUT 391 Team, CS, UofA                             
- *  Author:  Fan Deng
- *                                                                  
+ *                                          
  *  Licensed under the Apache License, Version 2.0 (the "License");         
  *  you may not use this file except in compliance with the License.        
  *  You may obtain a copy of the License at                                 
@@ -16,14 +13,17 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  *
+ *  The table used to store images is created by:
+ *  CREATE TABLE pacs_images (
+ *  record_id   int,
+ *  image_id    int,
+ *  thumbnail   blob,
+ *  regular_size blob,
+ *  full_size    blob,
+ *  PRIMARY KEY(record_id,image_id),
+ *  FOREIGN KEY(record_id) REFERENCES radiology_record
+ * );
  *
- *  the table shall be created using the following
-      CREATE TABLE pictures (
-            pic_id int,
-	    pic_desc  varchar(100),
-	    pic  BLOB,
-	    primary key(pic_id)
-      );
  *
  *  One may also need to create a sequence using the following 
  *  SQL statement to automatically generate a unique pic_id:
@@ -45,7 +45,7 @@ import javax.imageio.ImageIO;
 
 
 /**
- *  The package commons-fileupload-1.0.jar is downloaded from 
+ *  The package commons-fileupload-1.3.jar is downloaded from 
  *         http://jakarta.apache.org/commons/fileupload/ 
  *  and it has to be put under WEB-INF/lib/ directory in your servlet context.
  *  One shall also modify the CLASSPATH to include this jar file.
@@ -80,6 +80,7 @@ public class UploadImage extends HttpServlet {
 					recordID = Integer.parseInt(item.getString());
 				item = (FileItem) i.next();
 			}
+	
 			//Get the image stream
 			InputStream instream = item.getInputStream();
 
@@ -143,8 +144,8 @@ public class UploadImage extends HttpServlet {
 			response.sendRedirect("upload.jsp");
 
 		} catch( Exception ex ) {
-			//System.out.println( ex.getMessage());
-			response_message = ex.getMessage();
+			System.out.println( ex.getMessage());
+			
 		}
 
 	}

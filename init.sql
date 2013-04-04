@@ -61,7 +61,7 @@ create index description_index on radiology_record(description) indextype is ctx
 
 --Make indexes update
 define idxname = "name_index"
-define interval = "3/1440"
+define interval = "3"
 
 set serveroutput on
 declare
@@ -74,7 +74,7 @@ begin
 end;
 
 idxname = "diagnosis_index"
-interval = "3/1440"
+interval = "3"
 
 set serveroutput on
 declare
@@ -87,7 +87,7 @@ begin
 end;
 
 idxname = "description_index"
-interval = "3/1440"
+interval = "3"
 
 set serveroutput on
 declare
@@ -98,6 +98,9 @@ begin
   commit;
   dbms_output.put_line('job '||job||' has been submitted.');
 end;
+
+--MAKE DATA CUBE
+create view data_cube as select patient_name, test_type, test_date, extract(year from test_date) as tYear, extract(month from test_date) as tMonth, trunc(test_date, 'w')as tWeek, count(*) as record_count from radiology_record group by cube (patient_name, test_type, test_date, extract(year from test_date), extract(month from test_date), trunc(test_date, 'w'));
 
 
 

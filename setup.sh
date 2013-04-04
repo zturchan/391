@@ -1,9 +1,10 @@
 sqlplus -s /nolog <<EOF
-connect home/passw0rd
+connect zturchan/Pikachu1
 @setup.sql
 @init.sql
 commit;
 quit
 EOF
-sqlldr control=lob.ctl userid=home/passw0rd
+
+sqlldr control=lob.ctl userid=zturchan/Pikachu1
 starttomcat

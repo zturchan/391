@@ -1,4 +1,3 @@
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -45,11 +44,11 @@ public class DBAccess extends HttpServlet{
 		}catch(Exception e){out.println("<hr>" + e.getMessage() + "<hr>");}
 		out.println("<HTML><HEAD><TITLE>RIS - Search Results</TITLE>");
 		out.println("<link rel='stylesheet' type='text/css' href='style.css' /><HEAD>");
-		out.println("<BODY><div id='content'><TABLE><TR valign=top align=left>");
+		out.println("<BODY><div id='content'><TABLE border=1><TR valign=top align=left>");
 		out.println("<td>Patient Name</td><td>Doctor Name</td><td>Radiologist Name</td><td>Test Type</td><td>Prescribing Date</td><td>Test Date</td><td>Diagnosis</td><td>Description</td><td>Image Thumbnail</td></tr>");
 		for(Record r : records){
 			try{		
-				Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+				Connection con = DriverManager.getConnection(url, "zturchan", "Pikachu1");
 				Statement stmt = con.createStatement();
 				ResultSet rset = stmt.executeQuery("select image_id from pacs_images where record_id=" + r.getRecord_id());
 				
@@ -67,7 +66,7 @@ public class DBAccess extends HttpServlet{
 				out.println("<td>"); //for images
 				while(rset.next()){
 					image_id = rset.getInt("image_id");
-					out.println("<br><a href = 'oneimage?f" + image_id + "' target='_blank'> <img src = 'oneimage?t" + image_id + "'></a>");
+					out.println("<br><a href = 'oneimage?r" + image_id + "' target='_blank'> <img src = 'oneimage?t" + image_id + "'></a><br><a href = 'oneimage?f" + image_id + "' target='_blank'>View Full Size</a>");
 				}
 				stmt.close();
 				con.close();
@@ -92,8 +91,9 @@ public class DBAccess extends HttpServlet{
 
 		// connect to our db
 		Class drvClass = Class.forName(driverName);
-		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+		Connection con = DriverManager.getConnection(url, "zurchan", "Pikachu1");
 		Statement stmt = con.createStatement();
+
 		//big query to get back
 		ResultSet rset = stmt
 				.executeQuery("SELECT score(1), score(2), score(3), record_id, patient_name, " +
@@ -134,7 +134,7 @@ public class DBAccess extends HttpServlet{
 
 		
 		//figure out permissions
-		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+		Connection con = DriverManager.getConnection(url, "zturchan", "Pikachu1");
 		Statement stmt = con.createStatement();
 		ResultSet rset = stmt.executeQuery("Select class from users where user_name = '" + userName + "'");
 		String perms = "";
