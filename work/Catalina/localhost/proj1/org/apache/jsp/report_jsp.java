@@ -54,18 +54,20 @@ public final class report_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<html>\n");
       out.write("\n");
       out.write("<head>\n");
-      out.write("<title>Report Module</title>\n");
+      out.write("<title>Report Generation Module</title>\n");
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n");
       out.write("</head>\n");
       out.write("\n");
       out.write("\n");
 
+// if an administrator is logged in, show him the form
+// if not, just show an error message
 if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("a"))) {
 out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
 } else {
 
       out.write("\n");
-      out.write("<h2>Uploading Module</h2>\n");
+      out.write("<h2>Report Generation Module</h2>\n");
       out.write("<hr />\n");
       out.write("<form name=\"reportGen\" method=\"POST\"  action=\"reportgen.jsp\">\n");
       out.write("<table>\n");
@@ -74,6 +76,8 @@ out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
       out.write("<td>\n");
       out.write("<select name=\"diagnosis\">\n");
 
+// display all distinct diagnoses in the radiology_record table to
+// prevent searching for a nonexistent diagnosis
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
 String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -125,6 +129,7 @@ conn.close();
       out.write("<th>\n");
       out.write("Start Date:\n");
       out.write("</th>\n");
+      out.write("<!-- a default value is used to show the user the proper format to input a date -->\n");
       out.write("<td><input type=\"text\" name=\"startDate\" value=\"01-Jan-2013\"></td>\n");
       out.write("</tr>\n");
       out.write("<tr>\n");

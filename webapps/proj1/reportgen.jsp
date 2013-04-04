@@ -30,6 +30,9 @@ catch(Exception ex){
 
 String startDate = request.getParameter("startDate");
 String endDate = request.getParameter("endDate");
+if (startDate == "") {startDate = "01-Jan-1900";}
+if (endDate == "") {endDate = "31-Dec-2100";}
+
 String diagnosis = request.getParameter("diagnosis");
 
 PreparedStatement stmt = null;
@@ -50,6 +53,7 @@ out.println("<h2>End Date: " + endDate + "</h2>");
 
 out.println("<table border='1'>");
 out.println("<tr><th>User Name</th><th>First Name</th><th>Last Name</th><th>Address</th><th>Phone</th><th>First Test Date</th></tr>");
+// remove duplicate values
 ArrayList<String> names=new ArrayList<String>();
 while (rset != null && rset.next()){
 String name = rset.getString(1).trim();

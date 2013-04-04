@@ -95,23 +95,5 @@ catch(Exception ex){
 	}
     }
 
-    /*
-     *   Connect to the specified database
-     */
-    private Connection getConnected() throws Exception {
-
-	String username = "user_name";
-	String password = "*****";
-        /* one may replace the following for the specified database */
-	String dbstring = "jdbc.logicsql@luscar.cs.ualberta.ca:2000:database";
-	String driverName = "com.shifang.logicsql.jdbc.driver.LogicSqlDriver";
-
-	/*
-	 *  to connect to the database
-	 */
-	Class drvClass = Class.forName(driverName); 
-	DriverManager.registerDriver((Driver) drvClass.newInstance());
-	return( DriverManager.getConnection(dbstring,username,password) );
-    }
 }
 
