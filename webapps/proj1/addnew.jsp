@@ -2,12 +2,11 @@
 <HEAD>
 <TITLE>RIS</TITLE>
 </HEAD>
-
 <BODY>
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%
-
+//Get parameters from form found in addnew.html
 String userclass = request.getParameter("CLASS").trim();
 String username = (request.getParameter("USERNAME")).trim();
 String password = (request.getParameter("PASSWORD")).trim();
@@ -43,6 +42,7 @@ try{
 catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
+//This is the username of the user who is currently authenticated
 String sessionUserName = (String) session.getAttribute("userName");
 //select the user table from the underlying db and validate the user name and password
 Statement stmt = null;
@@ -62,12 +62,8 @@ if(!rset.next()){
 	response.sendRedirect("../proj1/login.html");
 }
 
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
-	
-//	sql = "insert into users values ('"+username+"','"+password+"','"+classid+"',CURRENT_DATE);";
-//	sql = "select user_name, password, class, date_registered from users";
 	PreparedStatement ps = conn.prepareStatement("insert into users(user_name,password,class,date_registered) values (?,?,?,?)");
 	java.util.Date currentDatetime = new java.util.Date(System.currentTimeMillis());  
 	ps.setString(1,username);
@@ -85,7 +81,7 @@ try {
 	ps.setString(6,phone);
 	ps.executeUpdate();
 	
-
+	//If we're adding a patient, then we add any doctors they want as well
 	if(classid.trim().equals("p")){
 		String[] docs = doctors.split(",");
 		for (int i = 0; i < docs.length; i++){
@@ -94,8 +90,7 @@ try {
 			ps.setString(1,docs[i]);
 			ps.setString(2,username);
 			ps.executeUpdate();
-		}
-		
+		}		
 	}
 	javax.swing.JOptionPane.showMessageDialog(null, "User "+username+" successfully added to the database.");
 	ps.close();
@@ -107,10 +102,7 @@ catch(SQLException ex) {
 	System.err.println("SQLException: " +
 	ex.getMessage());
 }
-
 %>
-
-
 </BODY>
 </HTML>
 

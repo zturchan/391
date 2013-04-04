@@ -6,19 +6,17 @@
 <!-- radio refresh consistency code from http://www.htmlhelpcentral.com/messageboard/showthread.php?17054-Reset-radio-buttons-on-refresh -->
 <BODY onload="var e=document.getElementsByTagName('input');var i=0;while(i<e.length){if(e[i++].type=='radio'){e[i].checked=false;}}">
 <div id="content">
-		
 <H1><CENTER>Add New Person</CENTER></H1>
-
 <FORM NAME="NewForm" ACTION="addnew.jsp" METHOD="post" >
-
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Class:</I></B></TD>
 <TD>
-<!-- issue, if you check a nn-patient radiobutton and then refresh the page, the hidden fields will be displayed
-and h previous radiobutton will remain checked.  Most likely need some sort of javascript fix for this-->
+<!-- If the user selects a nonpatient class, then they shouldn't be allowed to input a family doctor, so we hide the fields -->
 <!-- Show hide form fields from http://www.webdeveloper.com/forum/showthread.php?67756-show-and-hide-form-fields -->
 <!-- note that if the user goes from a patient to a nonpatient class the doctor field will be cleared, so we don' send that info to server-->
+<!-- issue, if you check a non-patient radiobutton and then refresh the page, the hidden fields will be displayed
+and thw previous radiobutton will remain checked.  Most likely need some sort of javascript fix for this-->
 <input type="radio" name="CLASS" value="doctor"  onclick="
  if (this.checked) {
  	this.form.DOCTORNAME.value='';
@@ -84,17 +82,13 @@ and h previous radiobutton will remain checked.  Most likely need some sort of j
 <TD><INPUT TYPE="text" NAME="DOCTORNAME" VALUE=""></TD>
 </TR>
 <TR VALIGN=TOP ALIGN=LEFT>
-
 </TR>
 </TABLE>
-
 <INPUT TYPE="submit" VALUE="Add Person">
 </FORM>
 </div>
 <div id="footer">
 <a href="../proj1/logout.jsp">Logout</a>
 </div>
-
-
 </BODY>
 </HTML>

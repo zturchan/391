@@ -3,21 +3,17 @@
 <link rel="stylesheet" type="text/css" href="style.css" />	
 <TITLE>RIS</TITLE>
 </HEAD>
-
 <BODY>
 <div id="content">
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%
-
 String username = (request.getParameter("user")).trim();
 String first = (request.getParameter("FIRST")).trim();
 String last = (request.getParameter("LAST")).trim();
 String add = (request.getParameter("ADDRESS")).trim();
 String email = (request.getParameter("EMAIL")).trim();
 String phone = (request.getParameter("PHONE")).trim();
-
-
 //establish the connection to the underlying database
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -56,8 +52,6 @@ if(!rset.next()){
 	javax.swing.JOptionPane.showMessageDialog(null, "You are not currently authenticated as an administrator.  Please authenticate first.");
 	response.sendRedirect("../proj1/login.html");
 }
-
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
 	
@@ -71,8 +65,6 @@ try {
 	rset.updateString(4,email);
 	rset.updateString(5,phone);
 	rset.updateRow();
-	
-	//idea - maybe empty field = no update?
 	//Now want to check if the user is a patient
 	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
 	stmt = conn.createStatement();
@@ -86,7 +78,6 @@ catch(SQLException ex) {
 	System.err.println("SQLException: " +
 	ex.getMessage());
 }
-
 %>
 </div>
 <div id="footer">

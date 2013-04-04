@@ -3,7 +3,6 @@
 <link rel="stylesheet" type="text/css" href="style.css" />	
 <TITLE>RIS</TITLE>
 </HEAD>
-
 <BODY>
 <div id="content">
 <%@ page import="java.sql.*" %>
@@ -18,7 +17,6 @@
 
 %>
 <H1><CENTER>Modifying <%= username %>'s Information</CENTER></H1>
-
 <FORM NAME="ModForm" ACTION="updateuser.jsp?user=<%= username %>" METHOD="post" >
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
@@ -41,11 +39,8 @@
 <TD><B><I>Email:</I></B></TD>
 <TD><INPUT TYPE="text" NAME="EMAIL" VALUE='<%= email %>'></TD>
 </TR>
-
-
 </TR>
 </TABLE>
-
 <INPUT TYPE="submit" VALUE="Update Info">
 </FORM>
 </div>

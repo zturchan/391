@@ -2,7 +2,6 @@
 <HEAD>
 <TITLE>RIS</TITLE>
 </HEAD>
-
 <BODY>
 <%@ page import="java.sql.*" %>
 <%
@@ -46,8 +45,6 @@ if(!rset.next()){
 	javax.swing.JOptionPane.showMessageDialog(null, "You cannot perform that action.  Please authenticate first.");
 	response.sendRedirect("../proj1/login.html");
 }
-
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
 	sql = "select PASSWORD from users where USER_NAME = '"+sessionUserName+"'";
@@ -59,7 +56,6 @@ try {
 	ResultSet newRset = stmt.executeQuery(sql);
 	while(newRset.next()){
 		javax.swing.JOptionPane.showMessageDialog(null, "Password Successfully Changed.");
-		//out.println("New pass is: " + newRset.getString(1));
 	}
 	stmt.close();
     conn.close();
@@ -70,8 +66,6 @@ catch(SQLException ex) {
 	ex.getMessage());
 }
 %>
-
-
 </BODY>
 </HTML>
 

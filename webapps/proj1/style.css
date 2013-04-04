@@ -13,7 +13,7 @@ body {
 	height:100%;
 }
 #content {
-	padding-bottom:20px; /* Height of the footer element */
+	padding-bottom:40px; /* Height of the footer element */
 }
 #footer {
 	width:100%;

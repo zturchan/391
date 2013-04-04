@@ -3,7 +3,6 @@
 <link rel="stylesheet" type="text/css" href="style.css" />	
 <TITLE>RIS</TITLE>
 </HEAD>
-
 <BODY>
 <div id="content">
 <%@ page import="java.sql.*" %>
@@ -18,18 +17,16 @@
 	String docs = request.getParameter("docs");
 	if (docs == null) docs = "";
 	String classid = request.getParameter("classid");
-	
-
 %>
 <H1><CENTER>Modifying <%= username %>'s Information</CENTER></H1>
-
-
-
 <FORM NAME="ModForm" ACTION="modify.jsp?user=<%= username %>" METHOD="post" >
-
 <TABLE>
 <TR VALIGN=TOP ALIGN=LEFT>
-<!-- Things the admin cannot change: username, password, class -->
+<!-- Things the admin cannot change: username, class -->
+<TR VALIGN=TOP ALIGN=LEFT>
+<TD><B><I>New Password:</I></B></TD>
+<TD><INPUT TYPE="password" NAME="PASSWORD" VALUE=""><BR></TD>
+</TR>
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>First Name:</I></B></TD>
 <TD><INPUT TYPE="text" NAME="FIRST" VALUE='<%= first %>'><BR></TD>
@@ -56,11 +53,8 @@
 <TD><INPUT TYPE="text" NAME="DOCTORNAME" VALUE='<%= docs %>'></TD>
 </TR>
 <% } %>
-
-
 </TR>
 </TABLE>
-
 <INPUT TYPE="submit" VALUE="Update Info">
 </FORM>
 </div>

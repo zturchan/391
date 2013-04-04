@@ -15,7 +15,7 @@ String add = (request.getParameter("ADDRESS")).trim();
 String email = (request.getParameter("EMAIL")).trim();
 String phone = (request.getParameter("PHONE")).trim();
 String doctors = (request.getParameter("DOCTORNAME")).trim();
-
+String newPass = (request.getParameter("PASSWORD")).trim();
 //establish the connection to the underlying database
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -54,8 +54,6 @@ if(!rset.next()){
 	javax.swing.JOptionPane.showMessageDialog(null, "You are not currently authenticated as an administrator.  Please authenticate first.");
 	response.sendRedirect("../proj1/login.html");
 }
-
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
 	
@@ -70,7 +68,15 @@ try {
 	rset.updateString(5,phone);
 	rset.updateRow();
 	
-	//idea - maybe empty field = no update?
+	//Only do this if a new password was entered
+	if (!newPass.equals("")){
+		sql = "select password from users where USER_NAME = '"+username+"'";
+		stmt = conn.createStatementResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		rset = stmt.executeQuery(sql);
+		rset.updateString(1,newPass);
+		rset.updateRow();
+		
+	}
 	//Now want to check if the user is a patient
 	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
 	stmt = conn.createStatement();
@@ -92,9 +98,7 @@ try {
 		}
 		ps.close();
 	}	
-	
 	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
-
 	stmt.close();
     conn.close();
     response.sendRedirect("../proj1/home.html");
@@ -103,10 +107,7 @@ catch(SQLException ex) {
 	System.err.println("SQLException: " +
 	ex.getMessage());
 }
-
 %>
-
-
 </BODY>
 </HTML>
 
