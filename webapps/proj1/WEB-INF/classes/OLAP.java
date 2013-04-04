@@ -61,11 +61,6 @@ public class OLAP extends HttpServlet {
 			
 			// print html stuff
 			out.println("<HTML><HEAD><TITLE>RIS - OLAP</TITLE>");
-			out.println("SELECT patient_name, test_type, tyear, tmonth, tweek, record_count FROM data_cube where patient_name "
-					+ use_name
-					+ " and test_type "
-					+ use_type
-					+ " and " + granularity);//debug
 			out.println("<link rel='stylesheet' type='text/css' href='style.css' /><HEAD>");
 			out.println("<BODY><div id='content'><TABLE border=1><TR valign=top align=left>");
 			out.println("<td>Patient Name</td><td>Test Type</td><td>Time Period</td><td>Record Count</td></tr>");
