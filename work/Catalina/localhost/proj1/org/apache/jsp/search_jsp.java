@@ -77,7 +77,7 @@ public final class search_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<TD><B><I>Start Date: (yyyy-mm-dd)</I></B></TD>\n");
       out.write("<TD><INPUT TYPE=\"text\" NAME=\"startdate\" VALUE=\"\"><BR></TD>\n");
       out.write("</TR>\n");
-      out.write("<TD><B><I>Keywords: (yyyy-mm-dd)</I></B></TD>\n");
+      out.write("<TD><B><I>End Date: (yyyy-mm-dd)</I></B></TD>\n");
       out.write("<TD><INPUT TYPE=\"text\" NAME=\"enddate\" VALUE=\"\"><BR></TD>\n");
       out.write("</TR>\n");
       out.write("</TABLE>\n");

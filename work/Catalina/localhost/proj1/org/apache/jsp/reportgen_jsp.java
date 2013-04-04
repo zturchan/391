@@ -120,7 +120,7 @@ out.println("<td>"+rset.getString(6).trim()+"</td></tr>");
 }
 out.println("</table>");
 out.println("<br /><a href='../proj1/report.jsp'>Back</a><br />");
-out.println("<a href='../proj1/home.jsp'>Home</a><br />");
+out.println("<a href='../proj1/home.html'>Home</a><br />");
 stmt.close();
 conn.close();
 

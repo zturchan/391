@@ -7,11 +7,9 @@
 
 
 <%
-if (session.getAttribute("userClass") != null){
-String userClass = (String)session.getAttribute("userClass");
-if (!userClass.equals("r")) {
+if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("a"))) {
 out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
-}}
+} else {
 %>
 <h2>Uploading Module</h2>
 <hr />
@@ -84,6 +82,7 @@ End Date:
 <input type="submit" name="submit" VALUE="Generate Report">
 </form>
 
+<% } %>
 <div id="footer">
 <a href="../proj1/logout.jsp">Logout</a>
 </div>	

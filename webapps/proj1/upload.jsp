@@ -5,13 +5,10 @@
 </head>
 
 <%
-if (session.getAttribute("userClass") != null){
-String userClass = (String)session.getAttribute("userClass");
-if (!userClass.equals("r")) {
+if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("r"))) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
-}}
+} else {
 %>
-
 
 <h2>Uploading Module</h2>
 <hr />
@@ -114,6 +111,7 @@ conn.close();
 
 <input type="submit" name="uploadImageSubmit" VALUE="Upload Image">
 </form>
+<% } %>
 <div id="footer">
 <a href="../proj1/logout.jsp">Logout</a>
 </div>	

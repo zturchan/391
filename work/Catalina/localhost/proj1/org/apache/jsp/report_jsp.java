@@ -60,11 +60,9 @@ public final class report_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
 
-if (session.getAttribute("userClass") != null){
-String userClass = (String)session.getAttribute("userClass");
-if (!userClass.equals("r")) {
+if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("a"))) {
 out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
-}}
+} else {
 
       out.write("\n");
       out.write("<h2>Uploading Module</h2>\n");
@@ -138,6 +136,8 @@ conn.close();
       out.write("</table>\n");
       out.write("<input type=\"submit\" name=\"submit\" VALUE=\"Generate Report\">\n");
       out.write("</form>\n");
+      out.write("\n");
+ } 
       out.write("\n");
       out.write("<div id=\"footer\">\n");
       out.write("<a href=\"../proj1/logout.jsp\">Logout</a>\n");
