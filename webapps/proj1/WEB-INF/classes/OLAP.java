@@ -31,56 +31,72 @@ public class OLAP extends HttpServlet {
 			use_type = "is not null";
 		}
 		String granularity = "";
-		if (req.getParameter("ganularity").equals("year")) {
+		if (req.getParameter("granularity").equals("year")) {
 			granularity = "tyear is not null and tmonth is null and tWeek is null";
 		}
-		if (req.getParameter("ganularity").equals("month")) {
+		if (req.getParameter("granularity").equals("month")) {
 			granularity = "tyear is null and tmonth is not null and tWeek is null";
 		}
-		if (req.getParameter("ganularity").equals("week")) {
+		if (req.getParameter("granularity").equals("week")) {
 			granularity = "tyear is null and tmonth is null and tWeek is not null";
 		}
-		if (req.getParameter("ganularity").equals("no")) {
+		if (req.getParameter("granularity").equals("no")) {
 			granularity = "tyear is null and tmonth is null and tWeek is null";
 		}
+		
+
 		// now get records
 		try {
 			Class drvClass = Class.forName(driverName);
-			Connection con = DriverManager.getConnection(url, "zurchan",
-					"Pikachu1");
+			Connection con = DriverManager.getConnection(url, "zturchan","Pikachu1");
 			Statement stmt = con.createStatement();
 			ResultSet rset = stmt
-					.executeQuery("SELECT patient_name, test_type, tyear, tmonth, tweek, record_count FROM data_cube where test_date is null and patient name "
+					.executeQuery("SELECT patient_name, test_type, tyear, tmonth, tweek, record_count FROM data_cube where patient_name "
 							+ use_name
 							+ " and test_type "
 							+ use_type
 							+ " and " + granularity);
 
+			
+			
 			// print html stuff
 			out.println("<HTML><HEAD><TITLE>RIS - OLAP</TITLE>");
+			out.println("SELECT patient_name, test_type, tyear, tmonth, tweek, record_count FROM data_cube where patient_name "
+					+ use_name
+					+ " and test_type "
+					+ use_type
+					+ " and " + granularity);//debug
 			out.println("<link rel='stylesheet' type='text/css' href='style.css' /><HEAD>");
 			out.println("<BODY><div id='content'><TABLE border=1><TR valign=top align=left>");
 			out.println("<td>Patient Name</td><td>Test Type</td><td>Time Period</td><td>Record Count</td></tr>");
 			while (rset.next()) {
 				out.println("<TR valign=top align=left>");
-				out.println("<td>" + rset.getString("patient_name") + "</td>");
-				out.println("<td>" + rset.getString("test_type") + "</td>");
+				if(req.getParameter("use_name").equals("Yes")){
+					out.println("<td>" + rset.getString("patient_name") + "</td>");
+				}else{out.println("<td>All</td>");}
+				
+				if(req.getParameter("use_type").equals("Yes")){
+					out.println("<td>" + rset.getString("test_type") + "</td>");
+				}else{out.println("<td>All</td>");}
 				// now check what time period to print
-				if (req.getParameter("ganularity").equals("year")) {
+				if (req.getParameter("granularity").equals("year")) {
 					out.println("<td>" + rset.getInt("tyear") + "</td>");
 				}
-				if (req.getParameter("ganularity").equals("month")) {
+				if (req.getParameter("granularity").equals("month")) {
 					out.println("<td>" + rset.getInt("tmonth") + "</td>");
 				}
-				if (req.getParameter("ganularity").equals("week")) {
+				if (req.getParameter("granularity").equals("week")) {
 					out.println("<td>" + rset.getString("tweek") + "</td>");
+				}
+				if (req.getParameter("granularity").equals("no")) {
+					out.println("<td>Any</td>");
 				}
 				// and print record count
 				out.println("<td>" + rset.getInt("record_count") + "</td>");
-				// close your shit
-				stmt.close();
-				con.close();
 			}
+			//close your shit 
+			stmt.close();
+			con.close();
 		} catch (Exception e) {
 			out.println("<hr>" + e.getMessage() + "<hr>");
 		}
