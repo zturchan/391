@@ -1,3 +1,5 @@
 logs/
 *~
-
+temp/
+lob.log
+lob.bad

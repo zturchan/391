@@ -22,7 +22,7 @@ public class QueryTest {
 		String defaultStart = "9888-01-01";
 		String defaultEnd = "0001-01-01";
 		
-		ArrayList<Record> records = DBAccess.getRecords("keyword", true, "to_date('"+defaultStart+"', 'yyyy-mm-dd')", "to_date('"+defaultEnd+"', 'yyyy-mm-dd')");
+		ArrayList<Record> records = DBAccess.getRecords("english", true, "to_date('"+defaultStart+"', 'yyyy-mm-dd')", "to_date('"+defaultEnd+"', 'yyyy-mm-dd')");
 		records = DBAccess.filterRecords(records);
 		for(Record r : records){
 			System.out.println(r.getTest_date().toString() + "  " + r.getRank());

@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import java.sql.*;
 
 public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
     implements org.apache.jasper.runtime.JspSourceDependent {
@@ -50,19 +51,24 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out = pageContext.getOut();
       _jspx_out = out;
 
+      out.write("\n");
       out.write("<head>\n");
       out.write("<title>Uploading Module</title>\n");
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n");
       out.write("</head>\n");
       out.write("\n");
 
+if (session.getAttribute("userClass") != null){
 String userClass = (String)session.getAttribute("userClass");
 if (!userClass.equals("r")) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
-}
+}}
 
       out.write("\n");
       out.write("\n");
+      out.write("\n");
+      out.write("<h2>Uploading Module</h2>\n");
+      out.write("<hr />\n");
       out.write("\n");
       out.write("<h3>Add a New Radiology Record to Database</h3>\t\n");
       out.write("<form name=\"newRecord\" action=\"uploadingModule.jsp\" method=\"post\">\n");
@@ -81,11 +87,11 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Prescribing Date:</th>\n");
-      out.write("<td><input type=\"text\" name=\"prescribingDate\"></td>\n");
+      out.write("<td><input type=\"text\" name=\"prescribingDate\" value=\"01-Jan-2013\"></td>\n");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Test Date:</th>\n");
-      out.write("<td><input type=\"text\" name=\"testDate\"></td>\n");
+      out.write("<td><input type=\"text\" name=\"testDate\" value=\"01-Jan-2013\"></td>\n");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Diagnosis:</th>\n");
@@ -105,7 +111,55 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
       out.write("<table>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Record ID:</th>\n");
-      out.write("<td><input type=\"text\" name=\"recordID\"></td>\n");
+      out.write("<td>\n");
+      out.write("<select name=\"dropdownID\">\n");
+
+Connection conn = null;
+String driverName = "oracle.jdbc.driver.OracleDriver";
+String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
+try{
+         //load and register the driver
+	Class drvClass = Class.forName(driverName);
+	DriverManager.registerDriver((Driver) drvClass.newInstance());
+}
+catch(Exception ex){
+	out.println("<hr>" + ex.getMessage() + "<hr>");
+}
+
+try{
+	//establish the connection
+	conn = DriverManager.getConnection(dbstring,"zturchan","Pikachu1");
+	conn.setAutoCommit(false);
+}
+catch(Exception ex){
+	out.println("<hr>" + ex.getMessage() + "<hr>");
+}
+
+Statement stmt = null;
+ResultSet rset = null;
+String sql = "select record_id from radiology_record";
+try{
+stmt = conn.createStatement();
+rset = stmt.executeQuery(sql);
+
+conn.commit();
+
+
+}
+     catch(Exception ex){
+         out.println("<hr>" + ex.getMessage() + "<hr>");
+}
+
+while (rset.next() ) {
+	out.println("<option>"+rset.getString(1)+"</option>");
+}
+
+ stmt.close();
+conn.close();
+
+      out.write("\n");
+      out.write("</select>\n");
+      out.write("</td>\n");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Image File:</th>\n");

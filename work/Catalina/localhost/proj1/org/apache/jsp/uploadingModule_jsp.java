@@ -84,7 +84,7 @@ catch(Exception ex){
 	String testType = request.getParameter("testType");
 	String prescribingDate = request.getParameter("prescribingDate");
 	String testDate = request.getParameter("testDate");
-	String diagnosis = request.getParameter("diagnosis");
+	String diagnosis = request.getParameter("diagnosis").toLowerCase();
 	String description = request.getParameter("description");
 
 
@@ -115,7 +115,7 @@ rset = stmt2.executeQuery(sql2);
 while(rset != null && rset.next())
 i = rset.getInt(1);
 
-javax.swing.JOptionPane.showMessageDialog(null, "The Radiology record was added with an id of "+i);                     
+javax.swing.JOptionPane.showMessageDialog(null, "The radiology record was added with an id of "+i);                     
 response.sendRedirect("../proj1/upload.jsp");
 }
      catch(Exception ex){
