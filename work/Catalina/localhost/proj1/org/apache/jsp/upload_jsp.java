@@ -55,9 +55,72 @@ public final class upload_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<head>\n");
       out.write("<title>Uploading Module</title>\n");
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\n");
+      out.write("<script>\n");
+      out.write(" function validateNewRecord()\n");
+      out.write("{\n");
+      out.write("\n");
+      out.write("if (document.forms[\"newRecord\"][\"patientName\"].value==null || document.forms[\"newRecord\"][\"patientName\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Patient name must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("\n");
+      out.write("if (document.forms[\"newRecord\"][\"doctorName\"].value==null || document.forms[\"newRecord\"][\"doctorName\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Doctor name must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\t\n");
+      out.write("\n");
+      out.write("if (document.forms[\"newRecord\"][\"prescribingDate\"].value==null || document.forms[\"newRecord\"][\"prescribingDate\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Prescribing date must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("\n");
+      out.write("if (document.forms[\"newRecord\"][\"testType\"].value==null || document.forms[\"newRecord\"][\"testType\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Test Type must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("\n");
+      out.write("\n");
+      out.write("if (document.forms[\"newRecord\"][\"testDate\"].value==null || document.forms[\"newRecord\"][\"testDate\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Test Date must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("if (document.forms[\"newRecord\"][\"diagnosis\"].value==null || document.forms[\"newRecord\"][\"diagnosis\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Diagnosis must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("\t\n");
+      out.write("if (document.forms[\"newRecord\"][\"description\"].value==null || document.forms[\"newRecord\"][\"description\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Description must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("}\n");
+      out.write("\n");
+      out.write("\n");
+      out.write(" function validateImage()\n");
+      out.write("{\n");
+      out.write("\n");
+      out.write("if (document.forms[\"uploadImage\"][\"imagePath\"].value==null || document.forms[\"uploadImage\"][\"imagePath\"].value==\"\")\n");
+      out.write("  {\n");
+      out.write("  alert(\"Image file path must be filled out\");\n");
+      out.write("  return false;\n");
+      out.write("  }\n");
+      out.write("\n");
+      out.write("\t\n");
+      out.write("}\n");
+      out.write("\n");
+      out.write("</script>\n");
       out.write("</head>\n");
       out.write("\n");
+      out.write("\n");
 
+// If a radiologist is logged in, displays the forms. If not, displays an error message
 if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("r"))) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
 } else {
@@ -68,7 +131,7 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
       out.write("<hr />\n");
       out.write("\n");
       out.write("<h3>Add a New Radiology Record to Database</h3>\t\n");
-      out.write("<form name=\"newRecord\" action=\"uploadingModule.jsp\" method=\"post\">\n");
+      out.write("<form name=\"newRecord\" onsubmit=\"return validateNewRecord()\" action=\"uploadingModule.jsp\" method=\"post\" >\n");
       out.write("<table>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Patient name:</th>\n");
@@ -84,6 +147,7 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Prescribing Date:</th>\n");
+      out.write("<!-- the form is prefilled to show the user the correct format to enter a date -->\n");
       out.write("<td><input type=\"text\" name=\"prescribingDate\" value=\"01-Jan-2013\"></td>\n");
       out.write("</tr>\n");
       out.write("<tr align=\"left\">\n");
@@ -104,13 +168,14 @@ out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
       out.write("\n");
       out.write("<hr>\n");
       out.write("<h3>Add A Medical Image to An Existing Record</h3>\n");
-      out.write("<form name=\"uploadImage\" method=\"POST\" ENCtype=\"multipart/form-data\" action=\"UploadImage\">\n");
+      out.write("<form name=\"uploadImage\" method=\"POST\" ENCtype=\"multipart/form-data\" action=\"UploadImage\" onsubmit=\"return validateImage()\">\n");
       out.write("<table>\n");
       out.write("<tr align=\"left\">\n");
       out.write("<th>Record ID:</th>\n");
       out.write("<td>\n");
       out.write("<select name=\"dropdownID\">\n");
 
+//fill dropdown with all the record ids from the radiology record table
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
 String dbstring = "jdbc:oracle:thin:@gwynne.cs.ualberta.ca:1521:CRS";
@@ -151,7 +216,7 @@ while (rset.next() ) {
 	out.println("<option>"+rset.getString(1)+"</option>");
 }
 
- stmt.close();
+stmt.close();
 conn.close();
 
       out.write("\n");

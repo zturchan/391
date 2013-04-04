@@ -22,19 +22,14 @@ catch(Exception ex){
 	out.println("<hr>" + ex.getMessage() + "<hr>");
 }
 
-
-
-	
 	String patientName = request.getParameter("patientName");
 	String doctorName = request.getParameter("doctorName");
 	String radiologistName = (String)session.getAttribute("userName");
 	String testType = request.getParameter("testType");
 	String prescribingDate = request.getParameter("prescribingDate");
 	String testDate = request.getParameter("testDate");
-	String diagnosis = request.getParameter("diagnosis").toLowerCase();
+	String diagnosis = request.getParameter("diagnosis");
 	String description = request.getParameter("description");
-
-
 
 //Insert record
 PreparedStatement stmt = null;
