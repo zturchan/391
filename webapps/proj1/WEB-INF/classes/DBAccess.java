@@ -91,7 +91,7 @@ public class DBAccess extends HttpServlet{
 
 		// connect to our db
 		Class drvClass = Class.forName(driverName);
-		Connection con = DriverManager.getConnection(url, "home", "passw0rd");
+		Connection con = DriverManager.getConnection(url, "zurchan", "Pikachu1");
 		Statement stmt = con.createStatement();
 
 		//big query to get back
