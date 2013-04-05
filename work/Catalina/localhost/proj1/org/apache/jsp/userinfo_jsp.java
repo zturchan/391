@@ -57,7 +57,6 @@ public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\t\n");
       out.write("<TITLE>RIS</TITLE>\n");
       out.write("</HEAD>\n");
-      out.write("\n");
       out.write("<BODY>\n");
       out.write("<div id=\"content\">\n");
       out.write("\n");
@@ -75,7 +74,6 @@ public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<H1><CENTER>Modifying ");
       out.print( username );
       out.write("'s Information</CENTER></H1>\n");
-      out.write("\n");
       out.write("<FORM NAME=\"ModForm\" ACTION=\"updateuser.jsp?user=");
       out.print( username );
       out.write("\" METHOD=\"post\" >\n");
@@ -110,11 +108,8 @@ public final class userinfo_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.print( email );
       out.write("'></TD>\n");
       out.write("</TR>\n");
-      out.write("\n");
-      out.write("\n");
       out.write("</TR>\n");
       out.write("</TABLE>\n");
-      out.write("\n");
       out.write("<INPUT TYPE=\"submit\" VALUE=\"Update Info\">\n");
       out.write("</FORM>\n");
       out.write("</div>\n");

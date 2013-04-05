@@ -82,7 +82,6 @@ catch(Exception ex){
 Statement stmt = null;
 ResultSet rset = null;
 String sql = "select PASSWORD from users where USER_NAME = '"+userName+"'";
-//out.println(sql);
 try{
 	stmt = conn.createStatement();
 	rset = stmt.executeQuery(sql);

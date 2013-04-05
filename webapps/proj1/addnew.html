@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="style.css" />	
 </HEAD>
 <!-- radio refresh consistency code from http://www.htmlhelpcentral.com/messageboard/showthread.php?17054-Reset-radio-buttons-on-refresh -->
-<BODY onload="var e=document.getElementsByTagName('input');var i=0;while(i<e.length){if(e[i++].type=='radio'){e[i].checked=false;}}">
+<BODY onload="var e=document.getElementsByTagName('input');var i=0;while(i<e.length){if(e[i++].type=='radio'){e[i].checked=true;}}">
 <div id="content">
 <H1><CENTER>Add New Person</CENTER></H1>
 <FORM NAME="NewForm" ACTION="addnew.jsp" METHOD="post" >
@@ -38,7 +38,7 @@ and thw previous radiobutton will remain checked.  Most likely need some sort of
    document.getElementById('DOCLABEL').style.visibility='hidden';
  } 
  return true;">Radiologist
-<input type="radio" name="CLASS" value="patient" onclick="
+<input type="radio" name="CLASS" value="patient" checked onclick="
  if (this.checked) {
    this.form.DOCTORNAME.style.visibility='visible';
    document.getElementById('DOCLABEL').style.visibility='visible';
@@ -47,7 +47,7 @@ and thw previous radiobutton will remain checked.  Most likely need some sort of
    this.form.DOCTORNAME.style.visibility='hidden';
    document.getElementById('DOCLABEL').style.visibility='hidden';
  }
- return true;" checked>Patient
+ return true;" >Patient
 </TD></TR>
 <TR VALIGN=TOP ALIGN=LEFT>
 <TD><B><I>Username:</I></B></TD>

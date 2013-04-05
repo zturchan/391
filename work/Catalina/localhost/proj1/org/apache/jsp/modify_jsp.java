@@ -61,14 +61,23 @@ public final class modify_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
 
+String username = "";
+String first = "";
+String last = "";
+String add = "";
+String email = "";
+String phone = "";
+String doctors = "";
+String newPass = "";
 
-String username = (request.getParameter("user")).trim();
-String first = (request.getParameter("FIRST")).trim();
-String last = (request.getParameter("LAST")).trim();
-String add = (request.getParameter("ADDRESS")).trim();
-String email = (request.getParameter("EMAIL")).trim();
-String phone = (request.getParameter("PHONE")).trim();
-String doctors = (request.getParameter("DOCTORNAME")).trim();
+try{username = (request.getParameter("user")).trim();} catch (Exception ex){}
+try{first = (request.getParameter("FIRST")).trim();} catch (Exception ex){}
+try{last = (request.getParameter("LAST")).trim();} catch (Exception ex){}
+try{add = (request.getParameter("ADDRESS")).trim();} catch (Exception ex){}
+try{email = (request.getParameter("EMAIL")).trim();} catch (Exception ex){}
+try{phone = (request.getParameter("PHONE")).trim();} catch (Exception ex){}
+try{doctors = (request.getParameter("DOCTORNAME")).trim();} catch (Exception ex){}
+try{newPass = (request.getParameter("PASSWORD")).trim();} catch (Exception ex){}
 
 //establish the connection to the underlying database
 Connection conn = null;
@@ -108,8 +117,6 @@ if(!rset.next()){
 	javax.swing.JOptionPane.showMessageDialog(null, "You are not currently authenticated as an administrator.  Please authenticate first.");
 	response.sendRedirect("../proj1/login.html");
 }
-
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
 	
@@ -124,7 +131,21 @@ try {
 	rset.updateString(5,phone);
 	rset.updateRow();
 	
-	//idea - maybe empty field = no update?
+	//Only do this if a new password was entered
+	if (!(newPass == null | newPass.equals(""))){
+		sql = "select password from users where USER_NAME = '"+username+"'";
+		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		rset = stmt.executeQuery(sql);
+		rset.updateString(1,newPass);
+		rset.updateRow();
+		
+	}
+}
+catch(SQLException ex) {
+	System.err.println("SQLException: " +
+	ex.getMessage());
+}
+try {
 	//Now want to check if the user is a patient
 	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
 	stmt = conn.createStatement();
@@ -146,21 +167,16 @@ try {
 		}
 		ps.close();
 	}	
-	
-	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
+} 
+catch(SQLException ex) {
 
+}
+	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
 	stmt.close();
     conn.close();
     response.sendRedirect("../proj1/home.html");
-}
-catch(SQLException ex) {
-	System.err.println("SQLException: " +
-	ex.getMessage());
-}
 
 
-      out.write("\n");
-      out.write("\n");
       out.write("\n");
       out.write("</BODY>\n");
       out.write("</HTML>\n");

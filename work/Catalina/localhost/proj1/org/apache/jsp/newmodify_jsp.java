@@ -57,7 +57,6 @@ public final class newmodify_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\t\n");
       out.write("<TITLE>RIS</TITLE>\n");
       out.write("</HEAD>\n");
-      out.write("\n");
       out.write("<BODY>\n");
       out.write("<div id=\"content\">\n");
       out.write("\n");
@@ -72,23 +71,21 @@ public final class newmodify_jsp extends org.apache.jasper.runtime.HttpJspBase
 	String docs = request.getParameter("docs");
 	if (docs == null) docs = "";
 	String classid = request.getParameter("classid");
-	
-
 
       out.write("\n");
       out.write("<H1><CENTER>Modifying ");
       out.print( username );
       out.write("'s Information</CENTER></H1>\n");
-      out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("<FORM NAME=\"ModForm\" ACTION=\"modify.jsp?user=");
       out.print( username );
       out.write("\" METHOD=\"post\" >\n");
-      out.write("\n");
       out.write("<TABLE>\n");
       out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
-      out.write("<!-- Things the admin cannot change: username, password, class -->\n");
+      out.write("<!-- Things the admin cannot change: username, class -->\n");
+      out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
+      out.write("<TD><B><I>New Password:</I></B></TD>\n");
+      out.write("<TD><INPUT TYPE=\"password\" NAME=\"PASSWORD\" VALUE=\"\"><BR></TD>\n");
+      out.write("</TR>\n");
       out.write("<TR VALIGN=TOP ALIGN=LEFT>\n");
       out.write("<TD><B><I>First Name:</I></B></TD>\n");
       out.write("<TD><INPUT TYPE=\"text\" NAME=\"FIRST\" VALUE='");
@@ -129,11 +126,8 @@ public final class newmodify_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("</TR>\n");
  } 
       out.write("\n");
-      out.write("\n");
-      out.write("\n");
       out.write("</TR>\n");
       out.write("</TABLE>\n");
-      out.write("\n");
       out.write("<INPUT TYPE=\"submit\" VALUE=\"Update Info\">\n");
       out.write("</FORM>\n");
       out.write("</div>\n");

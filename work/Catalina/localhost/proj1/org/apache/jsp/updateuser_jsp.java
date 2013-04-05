@@ -54,13 +54,13 @@ public final class updateuser_jsp extends org.apache.jasper.runtime.HttpJspBase
 
       out.write("<HTML>\n");
       out.write("<HEAD>\n");
+      out.write("<link rel=\"stylesheet\" type=\"text/css\" href=\"style.css\" />\t\n");
       out.write("<TITLE>RIS</TITLE>\n");
       out.write("</HEAD>\n");
-      out.write("\n");
       out.write("<BODY>\n");
+      out.write("<div id=\"content\">\n");
       out.write("\n");
       out.write("\n");
-
 
 String username = (request.getParameter("user")).trim();
 String first = (request.getParameter("FIRST")).trim();
@@ -68,8 +68,6 @@ String last = (request.getParameter("LAST")).trim();
 String add = (request.getParameter("ADDRESS")).trim();
 String email = (request.getParameter("EMAIL")).trim();
 String phone = (request.getParameter("PHONE")).trim();
-
-
 //establish the connection to the underlying database
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -108,8 +106,6 @@ if(!rset.next()){
 	javax.swing.JOptionPane.showMessageDialog(null, "You are not currently authenticated as an administrator.  Please authenticate first.");
 	response.sendRedirect("../proj1/login.html");
 }
-
-//out.println("Should be a real session user");
 //So if we get here, we're authenticated.
 try {
 	
@@ -123,12 +119,6 @@ try {
 	rset.updateString(4,email);
 	rset.updateString(5,phone);
 	rset.updateRow();
-	
-	//idea - maybe empty field = no update?
-	//Now want to check if the user is a patient
-	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
-	stmt = conn.createStatement();
-	rset = stmt.executeQuery(sql);
 	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
 	stmt.close();
     conn.close();
@@ -139,9 +129,11 @@ catch(SQLException ex) {
 	ex.getMessage());
 }
 
-
       out.write("\n");
-      out.write("\n");
+      out.write("</div>\n");
+      out.write("<div id=\"footer\">\n");
+      out.write("<a href=\"../proj1/logout.jsp\">Logout</a>\n");
+      out.write("</div>\n");
       out.write("\n");
       out.write("</BODY>\n");
       out.write("</HTML>\n");

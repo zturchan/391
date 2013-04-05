@@ -7,15 +7,24 @@
 <%@ page import="java.sql.*" %>
 <%@ page import="java.util.*" %>
 <%
+String username = "";
+String first = "";
+String last = "";
+String add = "";
+String email = "";
+String phone = "";
+String doctors = "";
+String newPass = "";
 
-String username = (request.getParameter("user")).trim();
-String first = (request.getParameter("FIRST")).trim();
-String last = (request.getParameter("LAST")).trim();
-String add = (request.getParameter("ADDRESS")).trim();
-String email = (request.getParameter("EMAIL")).trim();
-String phone = (request.getParameter("PHONE")).trim();
-String doctors = (request.getParameter("DOCTORNAME")).trim();
-String newPass = (request.getParameter("PASSWORD")).trim();
+try{username = (request.getParameter("user")).trim();} catch (Exception ex){}
+try{first = (request.getParameter("FIRST")).trim();} catch (Exception ex){}
+try{last = (request.getParameter("LAST")).trim();} catch (Exception ex){}
+try{add = (request.getParameter("ADDRESS")).trim();} catch (Exception ex){}
+try{email = (request.getParameter("EMAIL")).trim();} catch (Exception ex){}
+try{phone = (request.getParameter("PHONE")).trim();} catch (Exception ex){}
+try{doctors = (request.getParameter("DOCTORNAME")).trim();} catch (Exception ex){}
+try{newPass = (request.getParameter("PASSWORD")).trim();} catch (Exception ex){}
+
 //establish the connection to the underlying database
 Connection conn = null;
 String driverName = "oracle.jdbc.driver.OracleDriver";
@@ -69,14 +78,20 @@ try {
 	rset.updateRow();
 	
 	//Only do this if a new password was entered
-	if (!newPass.equals("")){
+	if (!(newPass == null | newPass.equals(""))){
 		sql = "select password from users where USER_NAME = '"+username+"'";
-		stmt = conn.createStatementResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+		stmt = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
 		rset = stmt.executeQuery(sql);
 		rset.updateString(1,newPass);
 		rset.updateRow();
 		
 	}
+}
+catch(SQLException ex) {
+	System.err.println("SQLException: " +
+	ex.getMessage());
+}
+try {
 	//Now want to check if the user is a patient
 	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
 	stmt = conn.createStatement();
@@ -98,15 +113,15 @@ try {
 		}
 		ps.close();
 	}	
+} 
+catch(SQLException ex) {
+
+}
 	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
 	stmt.close();
     conn.close();
     response.sendRedirect("../proj1/home.html");
-}
-catch(SQLException ex) {
-	System.err.println("SQLException: " +
-	ex.getMessage());
-}
+
 %>
 </BODY>
 </HTML>

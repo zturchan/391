@@ -1,0 +1,88 @@
+<html>
+<head>
+<title>RIS - Help</title>
+</head>
+<body>
+<div id="content">
+<h4>RIS User Documentation</h4>
+Zak Turchansky,Mitchell Home & Daniel Sopel
+<br><br>
+<b>Installation Instructions</b><br>
+First, save the files "setup.sh", "init.sql", and "setup.sql" to your catalina folder.  Open a Terminal instance and cd to that directory, then run "sh setup.sh".  This will refresh the database, clearing any old tables/values needed and adding new sample data, and then start the tomcat web server.  Do not close this terminal.  For further information regarding setup.sh, consult the project report.  
+<br><br>
+Then, ensure there is a copy of "makefile" and the following java files in the catalina/webapps/proj1/WEB-INF/classes directory:<br>
+-DBAccess.java<br>
+-getinfo.java<br>
+-getuserinfo.java<br>
+-OLAP.java<br>
+-oneimage.java<br>
+-picturebrowse.java<br>
+-Record.java<br>
+-UploadImage.java<br>
+<br>
+Then, in the classes folder execute both "make clean" and "make".<br>
+Finally, ensure the following files are in the catalina/webapps/proj1 folder:<br>
+-addnew.html<br>
+-addnew.jsp<br>
+-analysis.jsp<br>
+-changepw.html<br>
+-changepw.jsp<br>
+-home.html<br>
+-login.html<br>
+-login.jsp<br>
+-logout.jsp<br>
+-manage.html<br>
+-modify.html<br>
+-modify,jsp<br>
+-newmodify.html<br>
+-newmodify.html<br>
+-newmodify.jsp<br>
+-olap.jsp<br>
+-report.jsp<br>
+-reportgen.jsp<br>
+-search.jsp<br>
+-style.css<br>
+-updateuser.jsp<br>
+-upload.jsp<br>
+-uploadingModule.jsp<br>
+-userinfo.html<br>
+-userinfo.jsp<br>
+<br>
+<b>Login Module</b><br>
+When you first start using RIS, you'l want to navigate to http://****.cs.ualberta.ca:16320/proj1/login.html, where **** is the name of the machine on which the tomcat server is currently running.  
+<br><br>
+If you want to login, you'll need a valid username and password.  If you used setup.sh, then you should be able to login as an administrator using the default credentials admin/admin.  Other sample credentials are found in init.sql file.  When you're satisfied with the credentials, click the LOGIN button and you should be shown the home page of RIS.  
+<br><br>
+<b>Changing Your Password</b><br>
+If you want to change your password, select the "Change Password" option from the home screen.  Simply enter your new password and click the Submit button and your password will be updated.  You don't have to relogin with your new password during this current session, but any future sessions will require the use of the new password.  Upon submission, you'll see an alert box and be redirected to the home screen.
+<br><br>
+<b>Changing Your Personal Information</b><br>
+Clicking the "Change Personal Info" option from the home screen.  You'll see your current Name, address, phone number and email, and you can make any changes you desire.  Note that the phone number field can be a maximum of 10 digits (Area Code + Phone Number, no spaces).  When satisfied, click "Update Info" and you'll receive an alert and redirect to the home screen.   
+<br><br>
+<b>Managing Other Users (Admin Only)</b><br>
+To alter the information of other users, ensure you are authenticated as an administrator and click the "Manage Users (Admin Only" option from the home screen.  Here you'll be allowed to either add a new user or modify the information of an existing user.  Let's go through the add new user case first.  
+<br><br>
+Here, you'll see all the information you need to collect from a user to be entered into the database.  Use the radio buttons at the top to decide the class of the user, and fill out all other fields with the appropriate information.  Note that if you select a patient, then you'll be able to enter information for that patient's family doctor(s).  Here, enter the usernames of those doctors that are already in the database, separated by commas.  If the doctors are not in the database yet, add them first.  If you are adding any other class of user, the family doctor field will not be available.  Again remember that phone numbers can only be 10 digits.  Upon submit, if everything goes well, you'll receive a confirmation alert and a redirect to the home screen.
+<br><br>
+If you want to modify the information of another user that's already in the database, select the "Modify Existing Users" option.  Enter the username of the target user, and click the "Update This User's Info" button.  Here, you'll see a form similar to the one when you add a user, but the information will be pre-populated with the existing values from the database with the exception of the password.  If the password is left blank, then the user's password will remain unchanged.  When done, click "Update Info" and a dialog box should appear and  you will be redirected to the home screen.  
+<br><br>
+<b>Uploading Module</b><br>
+The Uploading Module may be used by radiologists to add new radiology records to the database or to add an image to an existing radiology record. To use the Uploading module, log in as an radiologist using the login module and navigate to upload.jsp. If you would like to add a new radiology record to the database, complete and submit the top form. If you would like to upload an image to an existing radiology record, complete and submit the bottom form.
+<br><br>
+To add a new radiology record, all of the following fields must be filled out: patient name, doctor name, test type, prescribing date and test date (use the same date format as in the default values, DD-MM-YYYY), diagnosis and description. Click "Add Record" when finished and if the record is successfully added to the database, you will see a message saying it was added and showing the id number of the new record.
+<br><br>
+To upload an image to an existing radiology record, select the corresponding record ID in the drop down select menu in the bottom form. If the desired record ID is not listed, there does not exist a record with that ID in the database. Click the Browse button... and navigate to the image file and click Open. Click Upload Image to submit the form and if the image is saved to the database, you will see a message dialog box saying "Upload Successful".
+<br><br>
+After submitting a form, you will return to the Upload page where you can upload more records and/or images. To log out of the authentication system, click the Logout button at the bottom of the page.
+<br><br>
+<b>Report Generation Module</b><br>
+The report module can be used by a system administrator to get the list of all patients with a specified diagnosis for a given time period. To use the Report Generation module, log in as an administrator using the login module and navigate to report.jsp. In the dropdown select field at the top of the form, select a diagnosis to search for. If a diagnosis does not appear in the list, there are no radiology records with that diagnosis in the database. Replace the default values in the Start Date and End Date fields with the time period boundaries in the same format as the default values (DD-MON-YYYY). If you want to search from the beginning date, leave the Start Date field blank. If you want to search up to the current date, leave the End Date field blank. If you want to search for all patients with the specified diagnosis regardless of time period, leave both fields blank. Click the Generate Report to see the list of patients.
+<br><br>
+A table with the the column headings user name, first name, last name, address, phone number and first test date are displayed. If no other rows are displayed, there are no patients with a test date between the Start Date and End Date for the specified diagnosis. Otherwise, the table is populated with each user's information that matches the search parameters. Each individual patient appears at most one time in this table. If multiple test dates for the given diagnosis exist for a patient, only his first test date is displayed. To go back to the input form to generate another report, click the back button underneath the table. To go to the home page, click the link that says home. To log out of the authentication system, click the Logout link at the bottom of the page.
+</div>
+<div id="footer">
+<a href="../proj1/logout.jsp">Logout</a>
+</div>
+</body>
+</html>
+

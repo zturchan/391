@@ -65,10 +65,6 @@ try {
 	rset.updateString(4,email);
 	rset.updateString(5,phone);
 	rset.updateRow();
-	//Now want to check if the user is a patient
-	sql = "select USER_NAME from users where USER_NAME = '"+username+"' and class = 'p'";
-	stmt = conn.createStatement();
-	rset = stmt.executeQuery(sql);
 	javax.swing.JOptionPane.showMessageDialog(null, "User info successfully updated in database.");
 	stmt.close();
     conn.close();
