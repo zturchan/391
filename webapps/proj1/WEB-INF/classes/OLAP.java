@@ -17,10 +17,11 @@ public class OLAP extends HttpServlet {
 		res.setContentType("text/html");
 		String sessionUser = (String) session.getAttribute("userName");
 		String sql = "select USER_NAME from users where USER_NAME = '"
-				+ sessionUserName + "' and class = 'a'";
+				+ sessionUser + "' and class = 'a'";
 		try {
-			stmt = conn.createStatement();
-			rset = stmt.executeQuery(sql);
+			Connection conn = DriverManager.getConnection(url, "zturchan", "Pikachu1");
+			Statement stmt = conn.createStatement();
+			ResultSet rset = stmt.executeQuery(sql);
 			if (!rset.next()) {
 				// If we're not a curently authenticated user, redirect to login
 				javax.swing.JOptionPane
