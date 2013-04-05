@@ -10,7 +10,9 @@ CLASSES = \
 		getuserinfo.java \
 		oneimage.java \
 		picturebrowse.java \
-
+		Record.java \
+		DBAccess.java \
+		OLAP.java 
 		
 		
 default:	classes
