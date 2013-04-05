@@ -43,6 +43,22 @@ public class getinfo extends HttpServlet {
 		String phone = "";
 		String classid = "";
 		String docs = "";	
+		HttpSession session = req.getSession();
+		String sessionUserName = (String) session.getAttribute("userName");
+		String sql = "select USER_NAME from users where USER_NAME = '"+sessionUserName+"' and class = 'a'";
+		try{
+			stmt = conn.createStatement();
+			rset = stmt.executeQuery(sql);
+			if(!rset.next()){
+			//If we're not a curently authenticated user, redirect to login
+				javax.swing.JOptionPane.showMessageDialog(null, "You are not currently authenticated as an administrator.  Please authenticate first.");
+
+				res.sendRedirect("../proj1/login.html");
+			}
+		} catch(Exception ex){
+			out.println("<hr>" + ex.getMessage() + "<hr>");
+		}	
+		
 		String sqlinfo = "select first_name,last_name,address,email,phone from persons where USER_NAME = '"+requestedUser+"'";
 		String sqluser = "select class from users where USER_NAME = '"+requestedUser+"'";
 		String sqldocs = "select doctor_name from family_doctor where patient_name = '"+requestedUser+"'";
@@ -76,6 +92,7 @@ public class getinfo extends HttpServlet {
 			javax.swing.JOptionPane.showMessageDialog(null, "There was an error connecting to the database.  Please ensure you have entered a valid username");
 			out.println("<hr>" + ex.getMessage() + "<hr>");
 		}
+		try {
 		res.sendRedirect(		"newmodify.jsp?user="+requestedUser+
 								"&classid="+classid+
 								"&first="+first+
@@ -84,5 +101,6 @@ public class getinfo extends HttpServlet {
 								"&email="+email+
 								"&phone="+phone+
 								"&docs="+docs);
+		} catch (Exception e){}//This catch is needed so that if we've already redirected then we have an exception from trying to redirect again.
 	}
 }
