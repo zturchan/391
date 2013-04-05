@@ -9,7 +9,7 @@
 <%
 // if an administrator is logged in, show him the form
 // if not, just show an error message
-if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("a"))) {
+if (session.getAttribute("userClass") == null || (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("a")))) {
 out.println("<h1>ERROR: Not logged in as a Administrator</h1><hr>");
 } else {
 %>

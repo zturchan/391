@@ -68,7 +68,7 @@ if (document.forms["uploadImage"]["imagePath"].value==null || document.forms["up
 
 <%
 // If a radiologist is logged in, displays the forms. If not, displays an error message
-if (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("r"))) {
+if (session.getAttribute("userClass") == null || (session.getAttribute("userClass") != null && !(((String)session.getAttribute("userClass")).equals("r")))) {
 out.println("<h1>ERROR: Not logged in as a Radiologist</h1><hr>");
 } else {
 %>
